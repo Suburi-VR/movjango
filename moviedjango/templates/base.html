@@ -1,0 +1,35 @@
+{% load static %}
+
+<html>
+    <head>
+        
+        <title>MOVIE DJANGO</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        
+
+    </head>
+    <body>
+        <div class="header">
+            
+                <h1><a href="{% url 'toppage' %}">MOVIE DJANGO</a></h1>
+                <ul class="nav-list">
+                    <li class="nav-list-item">
+                        <span class="badge badge-secondary"><a href="{% url 'movie_form' %}">投稿する</a></span>
+                    </li>
+                </ul>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+        
+        
+            </div>
+        </div>
+    </body>
+</html>
+

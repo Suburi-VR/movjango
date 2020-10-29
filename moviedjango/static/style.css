@@ -1,0 +1,102 @@
+h1 a {
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+}
+
+.title h1 {
+    margin: 0 0 20px;
+    font-size: 40px;
+    
+}
+
+.maintitle a ,
+.maintitle {
+    color: darkgreen;
+    font-size: 20px;
+    
+}
+
+.maintitle-top a ,
+.maintitle-top {
+    color: darkgreen;
+    font-size: 20px;
+    margin: 2px 0;
+}
+
+.maintitle-top h1 {
+    margin: 0 0 5rem;
+}
+
+.author p {
+    font-size:20px;
+    margin: 0;
+}
+
+.header {
+    margin: 0 auto 20px;
+    padding: 15px 0 30px;
+    text-align: center;
+    text-decoration: none;
+    background-color: darkgreen;
+}
+
+.nav-list a {
+    color: ghostwhite;
+    font-size: 3rem;
+}
+
+.nav-list {
+    list-style: none;
+    text-align: right;
+}
+
+.nav-list-item {
+    display: inline-block;
+
+}
+
+li {
+    margin: 0 60px;
+    font-size: 20px;
+}
+
+.col-md-12 {
+    margin: 0 auto;
+}
+
+.post-top {
+    display: inline-block;
+}
+
+.comment .badge a {
+    color: ghostwhite;
+    font-size: 2rem;
+}
+
+.comment .surver {
+    margin: 2rem 0 5rem;
+}
+
+.comment p {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.image {
+    text-align: center;
+    border: 1px solid darkgreen;
+}
+
+.content {
+    text-align: center;
+}
+
+.date,
+.maintitle-top,
+.maintitle,
+.author,
+.overview,
+.badge,
+.comment {
+    text-align: left;
+}

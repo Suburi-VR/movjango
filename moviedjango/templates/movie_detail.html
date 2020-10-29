@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="post">
+            <div class="date">
+                投稿日：{{ movie.published_date }}
+            </div>
+            <div class="author">
+                <p>投稿者：{{ movie.author }}</p>
+            </div>
+            <div class="maintitle">
+                <h1>{{ movie.title }}</h1>
+            </div>
+            <div class="overview">
+                <p>概要：{{ movie.overview }}</p>
+            </div>
+        {% if movie.movies %}
+            <div class ="image">
+                <img src="{{ movie.movies.url }}" style="width:600px;height:auto">
+            </div>
+        {% endif %}
+            <div class="comment">
+                <div class="surver">
+                    <span class="badge badge-secondary"><a href="{% url 'movie_comment' pk=movie.pk %}">コメントする</a></span>
+                </div>
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <strong>NAME : {{ comment.author }}</strong>
+                            <p>{{ comment.text }}</p>
+                        </div>
+                    {% endfor %}
+
+            </div>
+    </div>
+
+{% endblock %}

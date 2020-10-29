@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for movie in movies %}
+            <div class="post-top">
+                {% if movie.movies %}
+                    <div class ="image">
+                        <h1><a href="{% url 'movie_detail' pk=movie.pk %}"><img src="{{ movie.movies.url }}" style="width:200px;height:auto"></a></h1>
+                    </div>
+                {% endif %}
+                <div class="date">
+                    {{ movie.published_date }}
+                </div>
+                <div class="maintitle-top">
+                    <h1><a href="{% url 'movie_detail' pk=movie.pk %}">{{ movie.title|truncatechars:12 }}</a></h1>
+                </div>
+            </div>
+    {% endfor %}
+
+    {% include 'pagination.html' %}
+
+{% endblock %}
