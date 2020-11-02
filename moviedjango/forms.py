@@ -11,3 +11,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'text')
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = Movie
+        fields = ('title', 'overview','published_date')

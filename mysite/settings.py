@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mysite',
-    
+    'django_cleanup.apps.CleanupConfig',
+    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [

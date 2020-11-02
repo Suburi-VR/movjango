@@ -11,8 +11,10 @@
                 <h1>{{ movie.title }}</h1>
             </div>
             <div class="overview">
-                <p>概要：{{ movie.overview }}</p>
+                <p>概要：</p>
+                <p>{{ movie.overview }}</p>
             </div>
+            <div class="edit-button"><button type="button" class="btn btn-dark"><a href="{% url 'movie_edit' pk=movie.pk %}">編集</a></button></div>
         {% if movie.movies %}
             <div class ="image">
                 <img src="{{ movie.movies.url }}" style="width:600px;height:auto">

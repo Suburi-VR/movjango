@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Movie,Comment
 from django.urls import reverse
-from .forms import ImageForm,CommentForm
+from .forms import ImageForm,CommentForm,EditForm
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -59,6 +59,19 @@ def delete(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     movie.delete()
     return redirect('toppage')
+
+def movie_edit(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if request.method == 'POST':
+        form = EditForm(request.POST, instance=movie)
+        if form.is_valid():
+            movie = form.save(commit=False)
+            movie.published_date = timezone.now()
+            movie.save()
+            return redirect('movie_detail', pk=movie.pk)
+    else:
+        form = EditForm(instance=movie)
+    return render(request, 'movie_edit.html', {'form': form})
 
 
 # Create your views here.

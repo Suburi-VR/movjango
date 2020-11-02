@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="POST" class="poat-form">{% csrf_token %}
+    <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">送信</button>
+        <div class="button">
+            <button type="submit" class="save btn btn-success btn-lg btn-block">送信</button>
+        </div>
     </form>
 
 {% endblock %}

@@ -1,6 +1,35 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="model-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" datadismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" data-dismiss="modal">&times;</span>
+                </button>
+                <h5 class="modal-title" id="deleteModalLabel">この投稿を削除します</h5>
+                    
+            </div>
+            <div class="modal-body">
+                よろしいですか？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                <a href=""><button type="button" class="btn btn-danger">はい、削除します</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <div class="button">
+            <button type="submit" class="save btn btn-success btn-lg btn-block">更新</button>
+        </div>
+    </form>
     
+    <div><button class="delete btn btn-danger btn-lg btn-primary" data-toggle="modal" data-target="#deleteModal">削除</button></div>
 
 {% endblock %}
