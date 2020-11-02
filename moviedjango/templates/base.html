@@ -17,11 +17,49 @@
         <div class="header">
             
                 <h1><a href="{% url 'toppage' %}">MOVIE DJANGO</a></h1>
+                {% if user.is_authenticated %}
                         <ul class="nav-list">
                             <li class="nav-list-item">
-                                <button type="button" class="btn btn-danger"><a href="{% url 'movie_form' %}">投稿する</a></button>
+                                <a href="{% url 'movie_form' %}"><button type="button" class="btn btn-danger">投稿する</button></a>
+                            </li>
+
+                            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" datadismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true" data-dismiss="modal">&times;</span>
+                                            </button>
+                                            <h5 class="modal-title" id="logoutModalLabel">ログアウトします</h5>
+                                                
+                                        </div>
+                                        <div class="modal-body">
+                                            よろしいですか？
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                            <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">はい、ログアウトします</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <li class="nav-list-item">
+                                <button class="btn btn-info" data-toggle="modal" data-target="#logoutModal">ログアウト</button>
                             </li>
                         </ul>
+                
+                {% else %}
+                        <ul class="nav-list">
+                            <li class="nav-list-item">
+                                <div class="login_button">
+                                    <a href="{% url 'login' %}"><button type="button" class="btn btn-info">ログイン</button></a>
+                                </div>
+                            </li>
+                        </ul>
+                {% endif %}
+                        
+                        
         </div>
         <div class="content container">
             <div class="row">

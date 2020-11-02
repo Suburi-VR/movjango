@@ -5,6 +5,8 @@ from .forms import ImageForm,CommentForm,EditForm
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 def toppage(request):
     if request.method == 'GET':
@@ -28,6 +30,7 @@ def movie_detail(request, pk):
     comments = Comment.objects.filter(movie = movie)
     return render(request, 'movie_detail.html', {'movie': movie, 'comments':comments})
 
+@login_required(login_url='/accounts/login/')
 def movie_form(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
@@ -42,6 +45,7 @@ def movie_form(request):
         form = ImageForm()
     return render(request, 'movie_form.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def movie_comment(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     if request.method == 'POST':
@@ -55,11 +59,13 @@ def movie_comment(request, pk):
         form = CommentForm()
     return render(request, 'movie_comment.html', {'form': form})
 
+@login_required(login_url='/accounts/login/')
 def delete(request, pk):
-    movie = get_object_or_404(Movie, pk=pk)
+    movie = get_object_or_404(Movie,pk=pk)
     movie.delete()
     return redirect('toppage')
 
+@login_required(login_url='/accounts/login/')
 def movie_edit(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     if request.method == 'POST':
@@ -72,6 +78,10 @@ def movie_edit(request, pk):
     else:
         form = EditForm(instance=movie)
     return render(request, 'movie_edit.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('toppage')
 
 
 # Create your views here.

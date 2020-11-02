@@ -125,4 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 IMAGE_ROOT = os.path.join(BASE_DIR, 'images')
-IMAGE_URL ='/images/'
+IMAGE_URL = '/images/'
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'

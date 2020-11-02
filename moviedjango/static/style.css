@@ -63,7 +63,7 @@ body {
 
 .nav-list-item {
     display: inline-block;
-
+    margin: 0 10px;
 }
 
 li {
@@ -139,13 +139,15 @@ li {
     margin-top: 10rem;
 }
 
-.modal-content {
-    margin: 30rem 60rem;    
-}
-
 .modal-title {
     font-size: 3rem;
 }
 
-.close span {
+.login {
+    padding: 0 30rem;
+}
+
+.nav-list .modal-header,
+.nav-list .modal-body {
+    text-align: center;
 }
