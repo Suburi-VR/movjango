@@ -9,7 +9,7 @@ class Movie(models.Model):
     overview = models.TextField(max_length=500)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(default=timezone.now) #models.DateTimeField(blank=True, null=True)
-    movies = models.ImageField(upload_to='images/', blank=False, null=True)
+    movies = models.FileField(upload_to='images/', blank=False, null=True)
 
     def publish(self):
         self.published_date = timezone.now()

@@ -1,8 +1,7 @@
 .header h1 a {
     color: rgb(255, 255, 255);
-    font-size: 80px;
-    letter-spacing: 20px;
-    font-family: cursive;
+    font-size: 90px;
+    font-family: inherit;
 }
 
 .header a:hover {
@@ -17,7 +16,7 @@
 
 .maintitle a ,
 .maintitle {
-    color: darkgreen;
+    color: #3282B8;
     font-size: 20px;
     
 }
@@ -25,7 +24,7 @@
 .maintitle-top a,
 .maintitle-top a:hover,
 .maintitle-top {
-    color: darkgreen;
+    color: #3282B8;
     font-size: 20px;
     margin: 2px 0;
 }
@@ -44,7 +43,7 @@
     padding: 15px 0 30px;
     text-align: center;
     text-decoration: none;
-    background: linear-gradient(rgb(0, 202, 0), rgb(0, 31, 0));
+    background: #0f4c75;
 }
 
 body {
@@ -52,7 +51,7 @@ body {
 }
 
 .nav-list a {
-    color: ghostwhite;
+    color: #1B262C;
     font-size: 2rem;
 }
 
@@ -64,6 +63,8 @@ body {
 .nav-list-item {
     display: inline-block;
     margin: 0 10px;
+    background-color: #BBE1FA;
+    color: #1B262C;
 }
 
 li {
@@ -95,7 +96,7 @@ li {
 
 .image {
     text-align: center;
-    border: 1px solid darkgreen;
+    border: 1px solid #1B262C;
 }
 
 .content {
@@ -115,11 +116,6 @@ li {
 .post-form {
     display: inline-block;
 }
-
-.post-form p {
-    text-align: left;
-}
-
 
 .button {
     margin-top: 5rem;
@@ -150,4 +146,14 @@ li {
 .nav-list .modal-header,
 .nav-list .modal-body {
     text-align: center;
+}
+
+.login_button {
+    background-color: #BBE1FA;
+    color: #1B262C;
+}
+
+.button button {
+    background-color: #0f4c75;
+    color: white;
 }

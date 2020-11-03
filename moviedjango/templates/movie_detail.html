@@ -14,11 +14,9 @@
                 <p>概要：</p>
                 <p>{{ movie.overview }}</p>
             </div>
-            <div class="edit-button"><button type="button" class="btn btn-dark"><a href="{% url 'movie_edit' pk=movie.pk %}">編集</a></button></div>
+            <div class="edit-button"><button type="button" class="btn btn-dark"><a href="{% url 'movie_edit' pk=movie.pk %}">EDIT</a></button></div>
         {% if movie.movies %}
-            <div class ="image">
-                <img src="{{ movie.movies.url }}" style="width:600px;height:auto">
-            </div>
+                <video src="{{ movie.movies.url }}" controls style="width:1280px;height:720px"></video>
         {% endif %}
             <div class="comment">
                 <div class="surver">
@@ -33,4 +31,5 @@
 
             </div>
     </div>
+    <a href="{% url 'delete' pk=movie.pk %}"
 {% endblock %}

@@ -17,7 +17,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                <a href="delete"><button type="button" class="btn btn-danger">はい、削除します</button></a>
+                <a href="delete"><button type="button" class="btn btn-danger">削除</button></a>
             </div>
         </div>
     </div>
@@ -26,10 +26,10 @@
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
         <div class="button">
-            <button type="submit" class="save btn btn-success btn-lg btn-block">更新</button>
+            <button type="submit" class="save btn btn-lg">UPDATE</button>
         </div>
     </form>
     
-    <div><button class="delete btn btn-danger btn-lg btn-primary" data-toggle="modal" data-target="#deleteModal">削除</button></div>
+    <div><button class="delete btn btn-danger btn-lg btn-primary" data-toggle="modal" data-target="#deleteModal">DELETE</button></div>
 
 {% endblock %}
