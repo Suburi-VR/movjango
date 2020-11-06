@@ -5,55 +5,59 @@
         
         <title>MOVIE DJANGO</title>
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.0/js/bootstrap.min.js"></script>
         
         
 
     </head>
     <body>
-        <div class="header">
-            
-                <h1><a href="{% url 'toppage' %}">MOVIE DJANGO</a></h1>
-                {% if user.is_authenticated %}
-                        <ul class="nav-list">
-                            <li class="nav-list-item">
-                                <a href="{% url 'movie_form' %}"><button type="button" class="btn">UPLOAD</button></a>
-                            </li>
+        <div class="header">  
+            <nav class="navbar">
+                <a class="navbar-brand" href="{% url 'toppage' %}">MOVIE DJANGO</a>
+            </nav>
 
+                {% if user.is_authenticated %}
                             <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
+                                            <h5 class="modal-title" id="logoutModalLabel">ログアウトします</h5>
                                             <button type="button" class="close" datadismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true" data-dismiss="modal">&times;</span>
                                             </button>
-                                            <h5 class="modal-title" id="logoutModalLabel">ログアウトします</h5>
-                                                
                                         </div>
                                         <div class="modal-body">
                                             よろしいですか？
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                                            <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">ログアウト</button></a>
+                                            <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
+                                            <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger rounded-0">ログアウト</button></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <li class="nav-list-item">
-                                <button class="btn" data-toggle="modal" data-target="#logoutModal">LOGOUT</button>
+                        
+                        <ul class="nav-list">
+                            <li class="nav-list-item active list-inline-item">
+                                <div class="upload_button">
+                                    <button type="button" class="btn rounded-0"><a href="{% url 'movie_form' %}">UPLOAD</a></button>
+                                </div>
                             </li>
-                        </ul>
+                            <li class="nav-list-item active list-inline-item">
+                                <div class="logout_button">
+                                    <button type="button" class="btn rounded-0" data-toggle="modal" data-target="#logoutModal">LOGOUT</button>
+                                </div>
+                            </li>
+                        </ul> 
+                    
                 
                 {% else %}
                         <ul class="nav-list">
-                            <li class="nav-list-item">
+                            <li class="nav-list-item active list-inline-item">
                                 <div class="login_button">
-                                    <a href="{% url 'login' %}"><button type="button" class="btn">LOGIN</button></a>
+                                    <a href="{% url 'login' %}"><button type="button" class="btn rounded-0">LOGIN</button></a>
                                 </div>
                             </li>
                         </ul>
@@ -62,8 +66,8 @@
                         
         </div>
         <div class="content container">
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10">
                     {% block content %}
                     {% endblock %}
                 </div>

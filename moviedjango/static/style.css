@@ -1,159 +1,72 @@
-.header h1 a {
-    color: rgb(255, 255, 255);
-    font-size: 90px;
-    font-family: inherit;
+
+.nav-list-item button a,
+button.save,
+button.edit-button,
+button.edit-button a,
+button.submit  {
+    background-color: #0f4c75;
+    color: whitesmoke;
+    box-sizing: content-box;
 }
 
-.header a:hover {
-    color: azure;
+button.delete {
+    background-color: whitesmoke;
+    color: #0f4c75;
+    box-sizing: content-box;
+    margin-top: 3rem;
 }
 
-.title h1 {
-    margin: 0 0 20px;
-    font-size: 40px;
-    
+.logout_button button,
+.login_button button {
+    margin-left: 3rem;
+    background-color: whitesmoke;
+    color: #0f4c75;
 }
 
-.maintitle a ,
 .maintitle {
-    color: #3282B8;
-    font-size: 20px;
-    
+    color: #0f4c75;
 }
 
-.maintitle-top a,
-.maintitle-top a:hover,
-.maintitle-top {
-    color: #3282B8;
-    font-size: 20px;
-    margin: 2px 0;
+
+.header {
+    background-color: #0f4c75;
 }
 
-.maintitle-top h1 {
-    margin: 0 0 5rem;
+.header .navbar-brand{
+    color: whitesmoke;
+    font-size: 3rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.author p {
-    font-size:20px;
+
+
+.nav-list {
+    text-align: right;
+}
+
+.modal-header button.close {
+    padding: 0;
     margin: 0;
 }
 
-.header {
-    margin: 0 auto 20px;
-    padding: 15px 0 30px;
-    text-align: center;
-    text-decoration: none;
-    background: #0f4c75;
-}
-
-body {
-    background-color: rgb(0, 31, 0);
-}
-
-.nav-list a {
-    color: #1B262C;
-    font-size: 2rem;
-}
-
-.nav-list {
-    list-style: none;
-    text-align: right;
-}
-
-.nav-list-item {
-    display: inline-block;
-    margin: 0 10px;
-    background-color: #BBE1FA;
-    color: #1B262C;
-}
-
-li {
-    margin: 0 60px;
-    font-size: 20px;
-}
-
-.col-md-12 {
-    margin: 0 auto;
+.maintitle-top h2 a {
+    color: #0f4c75;
+    font-size: 15px;
 }
 
 .post-top {
-    display: inline-block;
-}
-
-.comment .badge a {
-    color: ghostwhite;
-    font-size: 2rem;
-}
-
-.comment .surver {
-    margin: 2rem 0 5rem;
+    margin-bottom: 3rem;
+    width: 240px;
 }
 
 .comment p {
-    margin-bottom: 1rem;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #0f4c75;
 }
 
-.image {
-    text-align: center;
-    border: 1px solid #1B262C;
-}
-
-.content {
-    text-align: center;
-}
-
-.date,
-.maintitle-top,
-.maintitle,
-.author,
-.overview,
-.badge,
 .comment {
-    text-align: left;
+    margin-top: 2rem;
 }
 
-.post-form {
-    display: inline-block;
-}
-
-.button {
-    margin-top: 5rem;
-
-}
-
-.edit-button {
-    color: black;
-    text-align: right;
-}
-
-.overview {
-    padding-right: 30rem;
-}
-
-.delete {
-    margin-top: 10rem;
-}
-
-.modal-title {
-    font-size: 3rem;
-}
-
-.login {
-    padding: 0 30rem;
-}
-
-.nav-list .modal-header,
-.nav-list .modal-body {
-    text-align: center;
-}
-
-.login_button {
-    background-color: #BBE1FA;
-    color: #1B262C;
-}
-
-.button button {
-    background-color: #0f4c75;
-    color: white;
+a.page-link {
+    color: #3282b3
 }

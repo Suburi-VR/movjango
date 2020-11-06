@@ -1,10 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
-        <div class="button">
-            <button type="submit" class="save btn btn-lg">UPLOAD</button>
-        </div>
-    </form>
+        <form method="POST" class="post-form" enctype="multipart/form-data" action="{% url 'movie_form' %}">
+            {% csrf_token %}
+            {% for item in form %}
+                <div class="form-group">
+                    <label for="{{item.id_for_label}}">{{item.label}}</label>
+                    {% if item.field.widget.input_type == "select" %}
+                        <select class="custom-select" name="{{item.name}}" id="{{item.id_for_label}}">
+                            <option selected>-----------</option>
+                            {% for u in item.field.choices.queryset %}
+                                <option value="{{ item.field.choices.queryset.get.id }}">{{ item.field.choices.queryset.get }}</option>
+                            {% endfor %}
+                        </select>
+                    {% elif item.field.widget.input_type == "file" %}
+                        <input 
+                            type="{{item.field.widget.input_type}}"
+                            class="form-control-file"
+                            {% if item.field.required %}required{% endif %} 
+                            name="{{item.name}}" 
+                            id="{{item.id_for_label}}"
+                        >
+                    {% elif item.field.widget.input_type == None %}
+                        <textarea
+                            class="form-control" 
+                            {% if item.field.required %}required{% endif %} 
+                            name="{{item.name}}" 
+                            id="{{item.id_for_label}}"
+                            rows="7"></textarea>
+                    {% else %}
+                        <input 
+                            type="{{item.field.widget.input_type}}"
+                            class="form-control" 
+                            {% if item.field.required %}required{% endif %} 
+                            name="{{item.name}}" 
+                            id="{{item.id_for_label}}"
+                            {% if item.value %}
+                                value="{{item.value|date:'Y-m-j H:i:s'}}"
+                            {% endif %}
+                        >
+                    {% endif %}
+                </div>
+            {% endfor %}
+                <div class="button">
+                    <button type="submit" class="save btn rounded-0" style="width:60px">UPLOAD</button>
+                </div>
+        </form>
 
 {% endblock %}

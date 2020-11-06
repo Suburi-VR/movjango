@@ -1,35 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="post">
-            <div class="date">
-                投稿日：{{ movie.published_date }}
-            </div>
-            <div class="author">
-                <p>投稿者：{{ movie.author }}</p>
-            </div>
-            <div class="maintitle">
-                <h1>{{ movie.title }}</h1>
-            </div>
-            <div class="overview">
-                <p>概要：</p>
-                <p>{{ movie.overview }}</p>
-            </div>
-            <div class="edit-button"><button type="button" class="btn btn-dark"><a href="{% url 'movie_edit' pk=movie.pk %}">EDIT</a></button></div>
-        {% if movie.movies %}
-                <video src="{{ movie.movies.url }}" controls style="width:1280px;height:720px"></video>
-        {% endif %}
-            <div class="comment">
-                <div class="surver">
-                    <span class="badge badge-secondary"><a href="{% url 'movie_comment' pk=movie.pk %}">コメントする</a></span>
-                </div>
-                    {% for comment in comments %}
-                        <div class="comment">
-                            <strong>NAME : {{ comment.author }}</strong>
-                            <p>{{ comment.text }}</p>
+    <div class="row justify-content-md-center">  
+        
+            <div class="post">
+                    <div class="date">
+                        投稿日：{{ movie.published_date }}
+                    </div>
+                    <div class="author">
+                        <p>投稿者：{{ movie.author }}</p>
+                    </div>
+                    <div class="maintitle">
+                        <h1>{{ movie.title }}</h1>
+                    </div>
+                    <div class="overview">
+                        <p>概要：</p>
+                        <p>{{ movie.overview }}</p>
+                    </div>
+                    <button type="button" class="edit-button btn rounded-0" style="width:60px"><a href="{% url 'movie_edit' pk=movie.pk %}">EDIT</a></button>
+                {% if movie.movies %}
+                    <div class="col-md-auto">
+                        <div class="row justify-content-md-center">
+                            <video src="{{ movie.movies.url }}" type="video/mp4; codecs='avc.1.640029, mp4a.40.2'" controls style="width:1280px;height:720px"></video>
                         </div>
-                    {% endfor %}
+                    </div>
+                {% endif %}
+                    <div class="comment">
+                        <div class="surver">
+                            <button type="button" class="edit-button btn rounded-0"><a href="{% url 'movie_comment' pk=movie.pk %}">コメントする</a></button>
+                        </div>
+                            {% for comment in comments %}
+                                <div class="comment">
+                                    <strong>NAME : {{ comment.author }}</strong>
+                                    <p>{{ comment.text }}</p>
+                                </div>
+                            {% endfor %}
 
+                    </div>
             </div>
     </div>
-    <a href="{% url 'delete' pk=movie.pk %}"
 {% endblock %}

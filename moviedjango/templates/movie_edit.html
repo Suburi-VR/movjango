@@ -6,30 +6,58 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">この投稿を削除します</h5>
                 <button type="button" class="close" datadismiss="modal" aria-label="Close">
                     <span aria-hidden="true" data-dismiss="modal">&times;</span>
                 </button>
-                <h5 class="modal-title" id="deleteModalLabel">この投稿を削除します</h5>
                     
             </div>
             <div class="modal-body">
                 よろしいですか？
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-                <a href="delete"><button type="button" class="btn btn-danger">削除</button></a>
+                <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
+                <a href="delete"><button type="button" class="btn btn-danger rounded-0">削除</button></a>
             </div>
         </div>
     </div>
 </div>
 
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {% for item in form %}
+            <div class="form-group">
+                <label for="{{item.id_for_label}}">{{item.label}}</label>
+                {% if item.field.widget.input_type == None %}
+                <textarea
+                    class="form-control" 
+                    {% if item.field.required %}required{% endif %} 
+                    name="{{item.name}}" 
+                    id="{{item.id_for_label}}"
+                    rows="7">{{item.instance}}</textarea>
+                {% else %}
+                <input 
+                    type="{{item.field.widget.input_type}}"
+                    class="form-control" 
+                    {% if item.field.required %}required{% endif %} 
+                    name="{{item.name}}" 
+                    id="{{item.id_for_label}}"
+                    {% if item.value %}
+                        value="{{item.value|date:'Y-m-j H:i:s'}}"
+                    {% endif %}
+                >
+                {% endif %}
+            </div>
+        {% endfor %}
+
+
         <div class="button">
-            <button type="submit" class="save btn btn-lg">UPDATE</button>
+            <button type="submit" class="save btn rounded-0" style="width:60px">UPDATE</button>
+        </div>
+    
+        <div class="button">
+            <button class="delete btn rounded-0" data-toggle="modal" data-target="#deleteModal" style="width:60px">DELETE</button>
         </div>
     </form>
-    
-    <div><button class="delete btn btn-danger btn-lg btn-primary" data-toggle="modal" data-target="#deleteModal">DELETE</button></div>
-
+</div>
 {% endblock %}
