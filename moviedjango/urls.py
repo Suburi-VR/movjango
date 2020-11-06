@@ -12,4 +12,5 @@ urlpatterns = [
     path('movie/<int:pk>/edit/', views.movie_edit, name='movie_edit'),
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.logout_view, name='logout'),
+    path('accounts/signup/', views.signup_view, name='signup'),
 ]

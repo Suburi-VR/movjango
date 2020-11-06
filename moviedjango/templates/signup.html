@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="POST" >
+        {% csrf_token %}
+        {% for item in form %}
+            <div class="form-group">
+                <label for="{{item.id_for_label}}">{{item.label}}</label>
+                <input type="{{item.field.widget.input_type}}"
+                    class="form-control"
+                    {% if field.required %}required{% endif %}
+                    name="{{item.name}}"
+                    id="{{item.id_for_label}}"
+                >
+            </div>
+        {% endfor %}
+        <button type="submit" class="submit btn rounded-0" style="width:60px">SIGNUP</button>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+{% endblock %}

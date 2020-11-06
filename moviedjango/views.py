@@ -7,6 +7,9 @@ from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
+
 
 def toppage(request):
     if request.method == 'GET':
@@ -82,6 +85,18 @@ def movie_edit(request, pk):
 def logout_view(request):
     logout(request)
     return redirect('toppage')
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        print(form.errors)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.save()
+            return redirect('toppage')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
 
 # Create your views here.
