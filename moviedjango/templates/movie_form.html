@@ -9,7 +9,7 @@
                         <select class="custom-select" name="{{item.name}}" id="{{item.id_for_label}}">
                             <option selected>-----------</option>
                             {% for u in item.field.choices.queryset %}
-                                <option value="{{ item.field.choices.queryset.get.id }}">{{ item.field.choices.queryset.get }}</option>
+                                <option value="{{ u.id }}">{{ u.username }}</option>
                             {% endfor %}
                         </select>
                     {% elif item.field.widget.input_type == "file" %}

@@ -8,7 +8,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 
 
 def toppage(request):
@@ -46,6 +46,7 @@ def movie_form(request):
             return redirect('movie_detail', pk=movie.pk)
     else:
         form = ImageForm()
+    print(form)
     return render(request, 'movie_form.html', {'form': form})
 
 @login_required(login_url='/accounts/login/')
@@ -91,8 +92,11 @@ def signup_view(request):
         form = UserCreationForm(request.POST)
         print(form.errors)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
             return redirect('toppage')
     else:
         form = UserCreationForm()
