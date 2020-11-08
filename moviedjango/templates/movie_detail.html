@@ -17,6 +17,8 @@
                         <p>{{ movie.overview }}</p>
                     </div>
                     <button type="button" class="edit-button btn rounded-0" style="width:60px"><a href="{% url 'movie_edit' pk=movie.pk %}">EDIT</a></button>
+                    <button type="button" class="edit-button btn rounded-0" style="width:60px"><a href="{% url 'favorite' pk=movie.pk %}">FAVORITE</a></button>
+
                 {% if movie.movies %}
                     <div class="col-md-auto">
                         <div class="row justify-content-md-center">

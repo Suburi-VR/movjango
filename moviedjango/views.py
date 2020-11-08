@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import Movie,Comment
+from .models import Movie,Comment,Favorite
 from django.urls import reverse
-from .forms import ImageForm,CommentForm,EditForm
+from .forms import ImageForm,CommentForm,EditForm,FavoriteForm
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -46,7 +46,6 @@ def movie_form(request):
             return redirect('movie_detail', pk=movie.pk)
     else:
         form = ImageForm()
-    print(form)
     return render(request, 'movie_form.html', {'form': form})
 
 @login_required(login_url='/accounts/login/')
@@ -101,6 +100,37 @@ def signup_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+def favorites(request):
+    if request.method == 'GET':
+        page_num = request.GET.get('p', 1)
+        pagenator = Paginator(Movie.objects.all().order_by('-created_date'),20)
+        try:
+            page = pagenator.page(page_num)
+        except PageNotAnInteger:
+            page = pagenator.page(1)
+        except EmptyPage:
+            page = pagenator.page(pagenator.num_pages)
+        
+        ctx = {
+            'page_obj': page,
+            'movies': page.object_list,
+            'is_paginated': page.has_other_pages}
+    return render(request, 'favorites.html', ctx)
+
+def favorite(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if request.method == 'POST':
+        form = FavoriteForm(request.POST)
+        if form.is_valid():
+            favorite = form.save(commit=False)
+            favorite.movie = movie
+            favorite.save()
+            return redirect('favorites', pk=pk)
+    else:
+        form = FavoriteForm()
+    return render(request, 'favorites.html', {'form': form})
+        
 
 
 # Create your views here.

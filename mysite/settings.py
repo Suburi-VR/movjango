@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mysite',
     'django_cleanup.apps.CleanupConfig',
+    'mysite',
     'bootstrap_modal_forms',
 ]
 

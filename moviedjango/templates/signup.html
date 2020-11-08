@@ -15,5 +15,8 @@
         {% endfor %}
         <button type="submit" class="submit btn rounded-0" style="width:60px">SIGNUP</button>
         <input type="hidden" name="next" value="{{ next }}"/>
+
+        {{ form.errors }}
+
     </form>
 {% endblock %}
