@@ -3,4 +3,5 @@ images/*
 
 !images/.gitkeep
 movenv
+venv
 *.pyc
