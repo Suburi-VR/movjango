@@ -1,7 +1,5 @@
 from django import forms
-from .models import Movie
-from .models import Comment
-from .models import Favorite
+from .models import Movie,Comment,Favorite
 
 class ImageForm(forms.ModelForm):
     class Meta:
@@ -21,4 +19,4 @@ class EditForm(forms.ModelForm):
 class FavoriteForm(forms.ModelForm):
     class Meta:
         model = Favorite
-        fields = ('movie', 'created_date', 'user')
+        fields = ('user', 'created_date', 'movie')

@@ -13,6 +13,6 @@ urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.logout_view, name='logout'),
     path('accounts/signup/', views.signup_view, name='signup'),
+    path('movie/<int:pk>/favorite', views.favorite, name='favorite'),
     path('movie/favorites/', views.favorites, name='favorites'),
-    path('movie/<int:pk>/favorite/', views.favorite, name='favorite'),
 ]

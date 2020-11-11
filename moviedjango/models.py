@@ -15,6 +15,22 @@ class Movie(models.Model):
         self.published_date = timezone.now()
         self.save()
 
+    def favored_by(self, user):
+        fs = self.favorite_set.filter(user=user)
+        return len(fs) == 1
+
+    def favor(self, user):
+        favorite = Favorite()
+        favorite.movie = self
+        favorite.user = user
+        favorite.save()
+
+    def disfavor(self, user):
+        if not self.favored_by(user):
+            return
+        fs = self.favorite_set.filter(user=user)
+        fs[0].delete()
+
     def __str__(self):
         return self.title
 
@@ -26,9 +42,6 @@ class Comment(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
 
-    def publish(self):
-        self.save()
-
     def __str__(self):
         return self.text
 
@@ -37,6 +50,11 @@ class Favorite(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['movie', 'user'], name='duplicate')]
+
+    def __str__(self):
+        return f'{str(self.user)} favor in 『{str(self.movie)}』'
 
 
 # Create your models here.

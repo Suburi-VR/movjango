@@ -9,14 +9,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
 
 
 def toppage(request):
     if request.method == 'GET':
         page_num = request.GET.get('p', 1)
-        pagenator = Paginator(Movie.objects.all().order_by('-published_date'),20)
+        pagenator = Paginator(Movie.objects.prefetch_related('favorite_set').all().order_by('-published_date'), 20)
         try:
             page = pagenator.page(page_num)
+            movies = page.object_list
+            faveored_or_not = [movie.favored_by(request.user) for movie in movies]
         except PageNotAnInteger:
             page = pagenator.page(1)
         except EmptyPage:
@@ -24,14 +27,14 @@ def toppage(request):
         
         ctx = {
             'page_obj': page,
-            'movies': page.object_list,
-            'is_paginated': page.has_other_pages}
+            'movies': [(movie,favorite) for movie,favorite in zip(movies,faveored_or_not)],
+            'is_paginated': page.has_other_pages,}
     return render(request, 'toppage.html', ctx)
 
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
     comments = Comment.objects.filter(movie = movie)
-    return render(request, 'movie_detail.html', {'movie': movie, 'comments':comments})
+    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments})
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):
@@ -89,7 +92,6 @@ def logout_view(request):
 def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        print(form.errors)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -104,33 +106,28 @@ def signup_view(request):
 def favorites(request):
     if request.method == 'GET':
         page_num = request.GET.get('p', 1)
-        pagenator = Paginator(Movie.objects.all().order_by('-created_date'),20)
+        pagenator = Paginator(Movie.objects.all().order_by('-created_date'), 20)
         try:
             page = pagenator.page(page_num)
-        except PageNotAnInteger:
+        except PageNotAnIntzceger:
             page = pagenator.page(1)
         except EmptyPage:
             page = pagenator.page(pagenator.num_pages)
         
         ctx = {
             'page_obj': page,
-            'movies': page.object_list,
+            'favorites': page.object_list,
             'is_paginated': page.has_other_pages}
     return render(request, 'favorites.html', ctx)
 
 def favorite(request, pk):
+    if request.method != 'POST':
+        return HttpResponse('only POST request allowed.', status=405)
     movie = get_object_or_404(Movie, pk=pk)
-    if request.method == 'POST':
-        form = FavoriteForm(request.POST)
-        if form.is_valid():
-            favorite = form.save(commit=False)
-            favorite.movie = movie
-            favorite.save()
-            return redirect('favorites', pk=pk)
+    if movie.favored_by(request.user):
+        movie.disfavor(request.user)
     else:
-        form = FavoriteForm()
-    return render(request, 'favorites.html', {'form': form})
-        
+        movie.favor(request.user)
+    return redirect('toppage')
 
-
-# Create your views here.
+# Create your views here
