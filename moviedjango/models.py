@@ -55,6 +55,7 @@ class Favorite(models.Model):
 
     def __str__(self):
         return f'{str(self.user)} favor in 『{str(self.movie)}』'
+        
 
 
 # Create your models here.

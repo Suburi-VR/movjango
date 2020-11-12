@@ -11,7 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 
-
+@login_required
 def toppage(request):
     if request.method == 'GET':
         page_num = request.GET.get('p', 1)
@@ -104,20 +104,21 @@ def signup_view(request):
     return render(request, 'signup.html', {'form': form})
 
 def favorites(request):
-    if request.method == 'GET':
-        page_num = request.GET.get('p', 1)
-        pagenator = Paginator(Movie.objects.all().order_by('-created_date'), 20)
-        try:
-            page = pagenator.page(page_num)
-        except PageNotAnIntzceger:
-            page = pagenator.page(1)
-        except EmptyPage:
-            page = pagenator.page(pagenator.num_pages)
-        
-        ctx = {
-            'page_obj': page,
-            'favorites': page.object_list,
-            'is_paginated': page.has_other_pages}
+    
+    page_num = request.GET.get('p', 1)
+    pagenator = Paginator(Favorite.objects.all().order_by('-created_date'), 20)
+    print(Favorite.objects.filter(user=request.user).all())
+    try:
+        page = pagenator.page(page_num)
+    except PageNotAnIntzceger:
+        page = pagenator.page(1)
+    except EmptyPage:
+        page = pagenator.page(pagenator.num_pages)
+    
+    ctx = {
+        'page_obj': page,
+        'favorites': page.object_list,
+        'is_paginated': page.has_other_pages}
     return render(request, 'favorites.html', ctx)
 
 def favorite(request, pk):
