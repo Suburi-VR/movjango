@@ -76,15 +76,16 @@ def delete(request, pk):
 def movie_edit(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     if request.method == 'POST':
-        form = EditForm(request.POST, instance=movie)
+        form = EditForm(request.POST)
         if form.is_valid():
             movie = form.save(commit=False)
             movie.published_date = timezone.now()
             movie.save()
             return redirect('movie_detail', pk=movie.pk)
     else:
-        form = EditForm(instance=movie)
-    return render(request, 'movie_edit.html', {'form': form})
+        form = EditForm()
+        print(movie)
+    return render(request, 'movie_edit.html', {'form': form, 'movie': movie})
 
 def logout_view(request):
     logout(request)

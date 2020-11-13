@@ -12,7 +12,8 @@
                             {% if item.field.required %}required{% endif %} 
                             name="{{item.name}}" 
                             id="{{item.id_for_label}}"
-                        >
+                            rows="1"
+                            value="{{request.user}}" readonly>
                     {% elif item.field.widget.input_type == None %}
                         <textarea
                             class="form-control" 
@@ -28,6 +29,7 @@
         <div class="button">
             <button type="submit" class="save btn rounded-0" style="width:100px">SEND</button>
         </div>
+        {{form.errors}}
     </form>
 
 {% endblock %}
