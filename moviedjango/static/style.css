@@ -70,3 +70,8 @@ button.delete {
 a.page-link {
     color: #3282b3
 }
+
+div .comment,
+div .overview {
+    word-break: break-all;
+}
