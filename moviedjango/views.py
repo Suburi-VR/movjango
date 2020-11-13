@@ -11,7 +11,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 
-@login_required
+@login_required(login_url='/accounts/login/')
 def toppage(request):
     if request.method == 'GET':
         page_num = request.GET.get('p', 1)

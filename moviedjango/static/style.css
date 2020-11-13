@@ -3,7 +3,8 @@
 button.save,
 button.edit-button,
 button.edit-button a,
-button.submit  {
+button.submit,
+.signup_button button  {
     background-color: #0f4c75;
     color: whitesmoke;
     box-sizing: content-box;
@@ -18,7 +19,6 @@ button.delete {
 
 .logout_button button,
 .login_button button {
-    margin-left: 3rem;
     background-color: whitesmoke;
     color: #0f4c75;
 }
@@ -71,7 +71,6 @@ a.page-link {
     color: #3282b3
 }
 
-div .comment,
-div .overview {
+.comment p {
     word-break: break-all;
 }
