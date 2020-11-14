@@ -10,6 +10,16 @@ button.submit,
     box-sizing: content-box;
 }
 
+div .subtitle-top {
+    background-color: #1b262c;
+    color: whitesmoke;
+}
+
+div .subtitle-favo {
+    background-color: #3282b8;
+    color: whitesmoke;
+}
+
 button.delete {
     background-color: whitesmoke;
     color: #0f4c75;
@@ -56,6 +66,7 @@ button.delete {
 
 .post-top {
     margin-bottom: 3rem;
+    margin-top: 3rem;
     width: 240px;
 }
 
@@ -73,4 +84,8 @@ a.page-link {
 
 .comment p {
     word-break: break-all;
+}
+
+html body {
+    background-color: whitesmoke;
 }
