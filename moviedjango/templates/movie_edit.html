@@ -34,7 +34,8 @@
                     {% if item.field.required %}required{% endif %} 
                     name="{{item.name}}" 
                     id="{{item.id_for_label}}"
-                    rows="7">{{movie.overview}}</textarea>
+                    rows="7"
+                    maxlength="500">{{movie.overview}}</textarea>
                 {% else %}
                 <input 
                     type="{{item.field.widget.input_type}}"
@@ -48,6 +49,7 @@
                     {% else %}
                         value="{{movie.title}}"
                     {% endif %}
+                    maxlength="50"
 
                 >
                 {% endif %}

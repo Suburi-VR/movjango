@@ -26,7 +26,8 @@
                             {% if item.field.required %}required{% endif %} 
                             name="{{item.name}}" 
                             id="{{item.id_for_label}}"
-                            rows="7"></textarea>
+                            rows="7"
+                            maxlength="500"></textarea>
                     {% else %}
                         <input 
                             type="{{item.field.widget.input_type}}"
@@ -34,6 +35,7 @@
                             {% if item.field.required %}required{% endif %} 
                             name="{{item.name}}" 
                             id="{{item.id_for_label}}"
+                            maxlength="50"
                             {% if item.value %}
                                 value="{{item.value|date:'Y-m-j H:i:s'}}"
                             {% endif %}

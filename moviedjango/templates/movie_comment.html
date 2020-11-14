@@ -17,6 +17,7 @@
                     {% elif item.field.widget.input_type == None %}
                         <textarea
                             class="form-control" 
+                            maxlength='200'
                             {% if item.field.required %}required{% endif %} 
                             name="{{item.name}}" 
                             id="{{item.id_for_label}}"

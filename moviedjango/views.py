@@ -84,7 +84,6 @@ def movie_edit(request, pk):
             return redirect('movie_detail', pk=movie.pk)
     else:
         form = EditForm()
-        print(movie)
     return render(request, 'movie_edit.html', {'form': form, 'movie': movie})
 
 def logout_view(request):
@@ -103,6 +102,7 @@ def signup_view(request):
             return redirect('toppage')
     else:
         form = UserCreationForm()
+    print(dir(form.error_messages.values.__text_signature__))
     return render(request, 'signup.html', {'form': form})
 
 def favorites(request):

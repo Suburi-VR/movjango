@@ -10,10 +10,15 @@
                     {% if field.required %}required{% endif %}
                     name="{{item.name}}"
                     id="{{item.id_for_label"
+                    maxlength="20"
                 >
             </div>
         {% endfor %}
         <button type="submit" class="submit btn rounded-0" style="width:100px">LOGIN</button>
         <input type="hidden" name="next" value="{{ next }}"/>
     </form>
+
+    {% if form.errors %}
+        ユーザー名またはパスワードを正しく入力してください。大文字と小文字は区別されます。
+    {%  endif %}
 {% endblock %}
