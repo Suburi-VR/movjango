@@ -5,3 +5,6 @@ images/*
 movenv
 venv
 *.pyc
+
+staticfiles
+config/local_settings.py
