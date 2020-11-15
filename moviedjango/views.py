@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import Movie,Comment,Favorite
+from .models import Movie,Comment
 from django.urls import reverse
 from .forms import ImageForm,CommentForm,EditForm,FavoriteForm
 from django.utils import timezone
@@ -10,6 +10,10 @@ from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
+from django.db.models import Q
+from django.contrib import messages
+
+
 
 @login_required(login_url='/accounts/login/')
 def toppage(request):
@@ -24,7 +28,6 @@ def toppage(request):
             page = pagenator.page(1)
         except EmptyPage:
             page = pagenator.page(pagenator.num_pages)
-        
         ctx = {
             'page_obj': page,
             'movies': [(movie,favorite) for movie,favorite in zip(movies,faveored_or_not)],
@@ -121,5 +124,14 @@ def favorite(request, pk):
     else:
         movie.favor(request.user)
     return redirect(request.META.get('HTTP_REFERER'))
+
+def search(request):
+    movies = Movie.objects.order_by(-published_date)
+    keyword = request.GET.get('keyword')
+    if keyword:
+        movies = movies.filter(Q(title__icontains=keyword))
+        messages.success(request,'「{}」のMOVIES'.format(keyword))
+    return render(request, 'toppage.html', {'movies': movies})
+
 
 # Create your views here.

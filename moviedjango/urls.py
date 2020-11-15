@@ -15,4 +15,5 @@ urlpatterns = [
     path('accounts/signup/', views.signup_view, name='signup'),
     path('movie/<int:pk>/favorite', views.favorite, name='favorite'),
     path('favorites/', views.favorites, name='favorites'),
+    path('search/', views.search, name='search'),
 ]
