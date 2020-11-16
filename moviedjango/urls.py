@@ -19,3 +19,5 @@ urlpatterns = [
     path('favorites/', views.favorites, name='favorites'),
     path('search/', views.search, name='search'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+print(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
