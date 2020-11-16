@@ -15,7 +15,6 @@ from django.contrib import messages
 
 
 
-@login_required(login_url='/accounts/login/')
 def toppage(request):
     if request.method == 'GET':
         page_num = request.GET.get('p', 1)
