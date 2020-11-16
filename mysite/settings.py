@@ -147,7 +147,7 @@ if hostname == 'NatitanoMacBook-Pro.local':
     }
 else:
     print('fugafuga')
-    DEBUG = True
+    DEBUG = False
     ALLOWED_HOSTS = ['movdjango.herokuapp.com']
     import dj_database_url
     db_from_env = dj_database_url.config()
