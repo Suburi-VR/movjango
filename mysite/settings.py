@@ -133,6 +133,7 @@ LOGIN_REDIRECT_URL = '/'
 import socket
 hostname = socket.gethostname()
 if hostname in hostname:
+    print('hogehoge')
     ALLOWED_HOSTS = ['127.0.0.1']
     DEBUG = True
     DATABASES = {
@@ -142,6 +143,7 @@ if hostname in hostname:
         }
     }
 else:
+    print('fugafuga')
     DEBUG = False
     ALLOWED_HOSTS = ['movdjango.herokuapp.com']
     import dj_database_url
