@@ -132,7 +132,7 @@ LOGIN_REDIRECT_URL = '/'
 
 import socket
 hostname = socket.gethostname()
-if hostname in hostname:
+if hostname == 'NatitanoMacBook-Pro.local':
     print('hogehoge')
     ALLOWED_HOSTS = ['127.0.0.1']
     DEBUG = True
