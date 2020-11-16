@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -16,4 +18,4 @@ urlpatterns = [
     path('movie/<int:pk>/favorite', views.favorite, name='favorite'),
     path('favorites/', views.favorites, name='favorites'),
     path('search/', views.search, name='search'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
