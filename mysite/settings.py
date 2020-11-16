@@ -148,7 +148,7 @@ if hostname == 'NatitanoMacBook-Pro.local':
     }
 else:
     print('fugafuga')
-    DEBUG = False
+    DEBUG = True
     import dj_database_url
     db_from_env = dj_database_url.config()
     DATABASES = {
