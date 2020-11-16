@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +26,7 @@ SECRET_KEY = '5@rq!#9r%r1dvlyp1_wxtw89a09qj%!-sf(zzsskay^d*2tle4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
 
 
 # Application definition
@@ -81,12 +80,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mysite',
-        'USER': 'narita',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -134,3 +129,23 @@ IMAGE_URL = '/images/'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
+
+import socket
+hostname = socket.gethostname()
+if hostname in hostname:
+    ALLOWED_HOSTS = ['127.0.0.1']
+    DEBUG = True
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DEBUG = False
+    ALLOWED_HOSTS = ['.herokuapp.com']
+    import dj_database_url
+    db_from_env = dj_database_url.config()
+    DATABASES = {
+    'default': db_from_env
+    }
