@@ -143,7 +143,7 @@ if hostname in hostname:
     }
 else:
     DEBUG = False
-    ALLOWED_HOSTS = ['.herokuapp.com']
+    ALLOWED_HOSTS = ['movdjango.herokuapp.com']
     import dj_database_url
     db_from_env = dj_database_url.config()
     DATABASES = {
