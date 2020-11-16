@@ -1,10 +1,7 @@
-db.sqlite3
-images/*
-
-!images/.gitkeep
-movenv
-venv
 *.pyc
-
-staticfiles
-config/local_settings.py
+db.sqlite3
+venv
+images/*
+__pycache__
+local_settings.py
+!images/.gitkeep
