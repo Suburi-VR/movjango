@@ -16,6 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -137,7 +139,6 @@ import socket
 hostname = socket.gethostname()
 if hostname == 'NatitanoMacBook-Pro.local':
     print('hogehoge')
-    ALLOWED_HOSTS = ['127.0.0.1']
     DEBUG = True
     DATABASES = {
     'default': {
@@ -148,7 +149,6 @@ if hostname == 'NatitanoMacBook-Pro.local':
 else:
     print('fugafuga')
     DEBUG = False
-    ALLOWED_HOSTS = ['movdjango.herokuapp.com']
     import dj_database_url
     db_from_env = dj_database_url.config()
     DATABASES = {
