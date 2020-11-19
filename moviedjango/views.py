@@ -12,8 +12,8 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib import messages
-""" import boto3
-import os """
+import boto3
+import os
 
 
 @login_required(login_url='/accounts/login/')
@@ -134,11 +134,11 @@ def search(request):
         messages.success(request,'「{}」のMOVIES'.format(keyword))
     return render(request, 'toppage.html', {'movies': movies})
 
-""" def for_s3():
-    sess = boto3.Sessions(os.environ[AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY])
-    s3 = sess.slient('s3')
+def for_s3():
+    sess = boto3.Session(os.environ[AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY])
+    s3 = sess.client('s3')
     f = open(request.FILES['movies'], mode='rb')
-    s3.put_object(Bucket='moviedjango', Body=b'hogehoge', Key='movie.mp4') """
+    s3.put_object(Bucket='moviedjango', Body=b'f', Key='movie.mp4')
 
 
 
