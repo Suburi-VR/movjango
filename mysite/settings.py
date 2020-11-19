@@ -127,7 +127,6 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-print(STATIC_ROOT)
 
 IMAGE_ROOT = os.path.join(BASE_DIR, 'images')
 IMAGE_URL = '/images/'
@@ -138,7 +137,6 @@ LOGIN_REDIRECT_URL = '/'
 import socket
 hostname = socket.gethostname()
 if hostname == 'NatitanoMacBook-Pro.local':
-    print('hogehoge')
     DEBUG = True
     DATABASES = {
     'default': {
@@ -147,7 +145,6 @@ if hostname == 'NatitanoMacBook-Pro.local':
         }
     }
 else:
-    print('fugafuga')
     DEBUG = False
     import dj_database_url
     db_from_env = dj_database_url.config()

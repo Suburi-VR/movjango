@@ -24,5 +24,4 @@ urlpatterns = [
     path('', include('moviedjango.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
+urlpatterns += static(settings.IMAGE_URL, document_root=settings.IMAGE_ROOT)
