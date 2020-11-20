@@ -137,7 +137,7 @@ def search(request):
 
 
 def for_s3(request):
-    filename = '{1}.mp4'
+    filename = 'movie.mp4'
     sess = boto3.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
     s3 = sess.client('s3')
     s3.put_object(Bucket='moviedjango', Body=request.FILES['movies'], Key='movie.mp4', ACL='public-read')
