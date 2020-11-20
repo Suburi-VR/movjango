@@ -7,7 +7,7 @@
         {% for movie, favorite in movies %}
             {% if favorite %}
                 <div class="post-top col-md-3 col-xs-12">
-                    <a href="{% url 'movie_detail' pk=movie.pk %}"><video class="border border-secondary" src="{{ movie.movies.url }}" type="video/mp4; codecs='avc.1.640029, mp4a.40.2'" style="width:100%;height:108px"></video></a>
+                    <a href="{% url 'movie_detail' pk=movie.pk %}"><video class="border border-secondary" src="{{ movie.movies }}" type="video/mp4; codecs='avc.1.640029, mp4a.40.2'" style="width:100%;height:108px"></video></a>
                     <div class="date">
                         {{ movie.published_date }}
                     </div>
