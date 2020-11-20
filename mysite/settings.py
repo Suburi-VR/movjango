@@ -136,7 +136,7 @@ LOGIN_REDIRECT_URL = '/'
 
 import socket
 hostname = socket.gethostname()
-if hostname == 'NatitanoMacBook-Pro.local':
+if hostname == socket.gethostname():
     DEBUG = True
     DATABASES = {
     'default': {

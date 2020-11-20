@@ -49,7 +49,9 @@ def movie_form(request):
             movie = form.save(commit=False)
             movie.author = request.user
             movie.published_date = timezone.now()
-            movie.movies = request.FILES['movies']
+            url = for_s3(request)
+            movie.movies = url
+            print(url)
             movie.save()
             return redirect('movie_detail', pk=movie.pk)
     else:
@@ -134,11 +136,14 @@ def search(request):
         messages.success(request,'「{}」のMOVIES'.format(keyword))
     return render(request, 'toppage.html', {'movies': movies})
 
-def for_s3():
-    sess = boto3.Session(os.environ[AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY])
+
+def for_s3(request):
+    filename = 'movie.mp4'
+    sess = boto3.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
     s3 = sess.client('s3')
-    f = open(request.FILES['movies'], mode='rb')
-    s3.put_object(Bucket='moviedjango', Body=b'f', Key='movie.mp4')
+    s3.put_object(Bucket='moviedjango', Body=request.FILES['movies'], Key='movie.mp4', ACL='public-read')
+    return f'https://moviedjango.s3-ap-northeast-1.amazonaws.com/{filename}'
+
 
 
 
