@@ -14,6 +14,7 @@ from django.db.models import Q
 from django.contrib import messages
 import boto3
 import os
+import datetime
 
 
 @login_required(login_url='/accounts/login/')
@@ -137,7 +138,8 @@ def search(request):
 
 
 def for_s3(request):
-    filename = 'movie.mp4'
+    d = datetime.datetime.now()
+    filename = f'movie{d}.mp4'
     sess = boto3.Session(aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
     s3 = sess.client('s3')
     s3.put_object(Bucket='moviedjango', Body=request.FILES['movies'], Key='movie.mp4', ACL='public-read')
