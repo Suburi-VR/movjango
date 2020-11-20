@@ -63,7 +63,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': '/logs/django.log', # ログファイルのパスを指定
+            'filename': '/tmp/django.log', # ログファイルのパスを指定
             'formatter': 'verbose',
         },
     },
