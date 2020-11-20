@@ -134,9 +134,7 @@ IMAGE_URL = '/images/'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
 
-import socket
-hostname = socket.gethostname()
-if hostname == socket.gethostname():
+if os.environ['ENV'] == 'local':
     DEBUG = True
     DATABASES = {
     'default': {
