@@ -51,7 +51,6 @@ def movie_form(request):
             movie.published_date = timezone.now()
             url = for_s3(request)
             movie.movies = url
-            print(url)
             movie.save()
             return redirect('movie_detail', pk=movie.pk)
     else:
