@@ -36,6 +36,13 @@
                     id="{{item.id_for_label}}"
                     rows="7"
                     maxlength="500">{{movie.overview}}</textarea>
+                {% elif item.field.widget.input_type == "select" %}
+                <select class="custom-select" name="{{item.name}}" id="{{item.id_for_label}}">
+                    <option selected>-----------</option>
+                    {% for u in item.field.choices.queryset %}
+                        <option value="{{ u.id }}">{{ u.username }}</option>
+                    {% endfor %}
+                </select>
                 {% else %}
                 <input 
                     type="{{item.field.widget.input_type}}"

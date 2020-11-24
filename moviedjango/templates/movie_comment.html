@@ -4,7 +4,8 @@
         {% csrf_token %}
         {% for item in form %}
             <div class="form-group">
-                <label for="{{item.id_for_label}}">{{item.label}}</label>
+                {{item}}
+                <!-- <label for="{{item.id_for_label}}">{{item.label}}</label>
                     {% if item.field.widget.input_type == "text" %}
                         <input 
                             type="{{item.field.widget.input_type}}"
@@ -22,7 +23,7 @@
                             name="{{item.name}}" 
                             id="{{item.id_for_label}}"
                             rows="7"></textarea>
-                    {% endif %}
+                    {% endif %} -->
             </div>
         {% endfor %}
 

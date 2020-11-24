@@ -80,16 +80,27 @@ def delete(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def movie_edit(request, pk):
+    print("1")
     movie = get_object_or_404(Movie, pk=pk)
+    print("2")
     if request.method == 'POST':
         form = EditForm(request.POST)
+        print("3")
         if form.is_valid():
+            print("4")
             movie = form.save(commit=False)
+            print("5")
             movie.published_date = timezone.now()
+            print("6")
             movie.save()
+            print("7")
             return redirect('movie_detail', pk=movie.pk)
+            print("8")
     else:
+        print("9")
         form = EditForm()
+        print("10")
+    print(form.errors)
     return render(request, 'movie_edit.html', {'form': form, 'movie': movie})
 
 def logout_view(request):

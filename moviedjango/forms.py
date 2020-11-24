@@ -1,5 +1,6 @@
 from django import forms
 from .models import Movie,Comment,Favorite
+from django.forms import ModelForm, Textarea, Select
 
 class ImageForm(forms.ModelForm):
     class Meta:
@@ -10,6 +11,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('author', 'text')
+        widgets = {
+            'author': Textarea(attrs={'cols': 10, 'rows': 20}),
+        }
 
 class EditForm(forms.ModelForm):
     class Meta:

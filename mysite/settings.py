@@ -46,20 +46,15 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
         },
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': '/tmp/django.log', # ログファイルのパスを指定
-            'formatter': 'verbose',
-        },
+        
     },
     'loggers': {
         'django': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
             'level': 'INFO',
         },
         'py.warnings': {
-            'handlers': ['console', 'file'],
+            'handlers': ['console'],
         },
     }
 }
