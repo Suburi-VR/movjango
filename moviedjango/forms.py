@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import Select, Textarea, TextInput, HiddenInput
+from django.forms import Select, Textarea, TextInput, HiddenInput, FileInput
 from .models import Movie, Comment, Favorite
 from django.utils import timezone
 
@@ -20,6 +20,9 @@ class ImageForm(forms.ModelForm):
                     'class': "form-control",
                     'readonly': True
                 }),
+                'movies': FileInput(attrs={
+                    'class': "form-control"
+                })
         }
 
 

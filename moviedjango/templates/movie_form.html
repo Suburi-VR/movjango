@@ -5,7 +5,8 @@
             {% for item in form %}
                 <div class="form-group">
                     <label for="{{item.id_for_label}}">{{item.label}}</label>
-                    {% if item.field.widget.input_type == "select" %}
+                    {{item}}
+                    <!-- {% if item.field.widget.input_type == "select" %}
                         <select class="custom-select" name="{{item.name}}" id="{{item.id_for_label}}">
                             <option selected>-----------</option>
                             {% for u in item.field.choices.queryset %}
@@ -40,7 +41,7 @@
                                 value="{{item.value|date:'Y-m-j H:i:s'}}"
                             {% endif %}
                         >
-                    {% endif %}
+                    {% endif %} -->
                 </div>
             {% endfor %}
                 <div class="button">

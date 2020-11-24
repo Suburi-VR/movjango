@@ -52,7 +52,6 @@ def movie_form(request):
             url = for_s3(request)
             movie.movies = url
             movie.save()
-            print(request.user)
             return redirect('movie_detail', pk=movie.pk)
     else:
         form = ImageForm()
