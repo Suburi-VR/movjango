@@ -73,11 +73,8 @@ def movie_comment(request, pk):
 
 @login_required(login_url='/accounts/login/')
 def delete(request, pk):
-    print("1")
     movie = get_object_or_404(Movie,pk=pk)
-    print("2")
     movie.delete()
-    print("3")
     return redirect('toppage')
 
 @login_required(login_url='/accounts/login/')

@@ -3,9 +3,11 @@
     <div class="row justify-content-md-center">  
         
             <div class="post">
-                    <div class="edit" style="width:1280px;">
-                        <button type="button" class="edit-button btn rounded-0" style="width:100px"><a href="{% url 'movie_edit' pk=movie.pk %}">EDIT</a></button>
-                    </div>
+                    {% if request.user == movie.author %}
+                        <div class="edit" style="width:1280px;">
+                            <button type="button" class="edit-button btn rounded-0" style="width:100px"><a href="{% url 'movie_edit' pk=movie.pk %}">EDIT</a></button>
+                        </div>
+                    {% endif %}
                     <div class="date">
                         投稿日：{{ movie.published_date }}
                     </div>
