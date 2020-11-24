@@ -21,7 +21,7 @@ class ImageForm(forms.ModelForm):
                     'readonly': True
                 }),
                 'movies': FileInput(attrs={
-                    'class': "form-control"
+                    'class': "form-control-file"
                 })
         }
 
