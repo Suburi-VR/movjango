@@ -28,7 +28,8 @@
         {% for item in form %}
             <div class="form-group">
                 <label for="{{item.id_for_label}}">{{item.label}}</label>
-                {% if item.field.widget.input_type == None %}
+                {{item}}
+                <!-- {{{% if item.field.widget.input_type == None %}
                 <textarea
                     class="form-control" 
                     {% if item.field.required %}required{% endif %} 
@@ -52,7 +53,7 @@
                     maxlength="50"
 
                 >
-                {% endif %}
+                {% endif %}}} -->
             </div>
         {% endfor %}
 

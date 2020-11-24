@@ -89,7 +89,8 @@ def movie_edit(request, pk):
             movie.save()
             return redirect('movie_detail', pk=movie.pk)
     else:
-        form = EditForm()
+        form = EditForm(instance=movie)
+        print(Movie.author)
     return render(request, 'movie_edit.html', {'form': form, 'movie': movie})
 
 def logout_view(request):
