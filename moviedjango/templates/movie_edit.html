@@ -27,7 +27,9 @@
         {% csrf_token %}
         {% for item in form %}
             <div class="form-group">
-                <label for="{{item.id_for_label}}">{{item.label}}</label>
+                {% if not item.label == 'Author' %}
+                    <label for="{{item.id_for_label}}">{{item.label}}</label>
+                {% endif %}
                 {{item}}
                 <!-- {{{% if item.field.widget.input_type == None %}
                 <textarea

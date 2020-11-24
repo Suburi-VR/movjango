@@ -1,6 +1,7 @@
 from django import forms
-from django.forms import Select, Textarea, TextInput
+from django.forms import Select, Textarea, TextInput, HiddenInput
 from .models import Movie, Comment, Favorite
+from django.utils import timezone
 
 class ImageForm(forms.ModelForm):
     class Meta:
@@ -17,9 +18,8 @@ class EditForm(forms.ModelForm):
         model = Movie
         fields = ('author', 'title', 'overview','published_date')
         widgets = {
-                'author': Select(attrs={
-                    'class': "form-control",
-                    'disabled': True, 
+                'author': HiddenInput(attrs={
+                    'class': "form-control"
                 }),
                 'title': TextInput(attrs={
                     'class': "form-control",
@@ -31,7 +31,7 @@ class EditForm(forms.ModelForm):
                 }),
                 'published_date': TextInput(attrs={
                     'class': "form-control",
-                    'disabled': True,
+                    'readonly': True
                 }),
         }
 
