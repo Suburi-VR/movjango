@@ -6,7 +6,22 @@ from django.utils import timezone
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Movie
-        fields = ('author', 'title','movies', 'overview','published_date')
+        fields = ('title','movies', 'overview','published_date')
+        widgets = {
+                'title': TextInput(attrs={
+                    'class': "form-control",
+                }),
+                'overview': Textarea(attrs={
+                    'class': "form-control",
+                    'rows': 7,
+                    'maxlength': 500
+                }),
+                'published_date': TextInput(attrs={
+                    'class': "form-control",
+                    'readonly': True
+                }),
+        }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

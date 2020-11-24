@@ -49,10 +49,10 @@ def movie_form(request):
         if form.is_valid():
             movie = form.save(commit=False)
             movie.author = request.user
-            movie.published_date = timezone.now()
             url = for_s3(request)
             movie.movies = url
             movie.save()
+            print(request.user)
             return redirect('movie_detail', pk=movie.pk)
     else:
         form = ImageForm()
