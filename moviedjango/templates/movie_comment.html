@@ -6,25 +6,6 @@
             <div class="form-group">
                 <label for="{{item.id_for_label}}">{{item.label}}</label>
                 {{item}}
-                <!-- <label for="{{item.id_for_label}}">{{item.label}}</label>
-                    {% if item.field.widget.input_type == "text" %}
-                        <input 
-                            type="{{item.field.widget.input_type}}"
-                            class="form-control" 
-                            {% if item.field.required %}required{% endif %} 
-                            name="{{item.name}}" 
-                            id="{{item.id_for_label}}"
-                            rows="1"
-                            value="{{request.user}}" readonly>
-                    {% elif item.field.widget.input_type == None %}
-                        <textarea
-                            class="form-control" 
-                            maxlength='200'
-                            {% if item.field.required %}required{% endif %} 
-                            name="{{item.name}}" 
-                            id="{{item.id_for_label}}"
-                            rows="7"></textarea>
-                    {% endif %} -->
             </div>
         {% endfor %}
 
