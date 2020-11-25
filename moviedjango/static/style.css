@@ -1,4 +1,3 @@
-
 .nav-list-item button a,
 button.save,
 button.edit-button,
@@ -45,6 +44,7 @@ button.delete {
 
 .header {
     background-color: #0f4c75;
+    margin-bottom: 2rem;
 }
 
 .header .navbar-brand{
@@ -52,8 +52,6 @@ button.delete {
     font-size: 3rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-
-
 
 .nav-list {
     text-align: right;
@@ -93,4 +91,18 @@ a.page-link {
 
 html body {
     background-color: whitesmoke;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+min-height: 100%;
+display: flex;
+flex-direction: column;
+}
+
+.content {
+flex: 1;
 }
