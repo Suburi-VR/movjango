@@ -4,10 +4,15 @@ button.save,
 button.edit-button,
 button.edit-button a,
 button.submit,
-.signup_button button  {
+.signup_button button,
+footer.page-footer  {
     background-color: #0f4c75;
     color: whitesmoke;
     box-sizing: content-box;
+}
+
+footer.page-footer {
+    margin-top: 3rem;
 }
 
 div .subtitle-top {

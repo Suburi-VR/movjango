@@ -109,14 +109,27 @@ def signup_view(request):
             return redirect('toppage')
     else:
         form = UserCreationForm()
-    print(dir(form.error_messages.values.__text_signature__))
     return render(request, 'signup.html', {'form': form})
 
+
 def favorites(request):
-    movies = Movie.objects.all().order_by('-published_date')
-    faveored_or_not = [movie.favored_by(request.user) for movie in movies]
-    dic = {'movies': [(movie,favorite) for movie,favorite in zip(movies,faveored_or_not)]}
+    if request.method == 'GET':
+        page_num = request.GET.get('p', 1)
+        pagenator = Paginator(Movie.objects.prefetch_related('favorite_set').filter(favorite__user=request.user).order_by('-published_date'), 20)
+        try:
+            page = pagenator.page(page_num)
+            movies = page.object_list
+            faveored_or_not = [movie.favored_by(request.user) for movie in movies]
+        except PageNotAnInteger:
+            page = pagenator.page(1)
+        except EmptyPage:
+            page = pagenator.page(pagenator.num_pages)
+        dic = {
+            'page_obj': page,
+            'movies': [(movie,favorite) for movie,favorite in zip(movies, faveored_or_not)],
+            'is_paginated': page.has_other_pages,}
     return render(request, 'favorites.html', dic)
+
 
 def favorite(request, pk):
     if request.method != 'POST':
