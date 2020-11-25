@@ -29,9 +29,11 @@ class ImageForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('author', 'text')
+        fields = ('text',)
         widgets = {
-            'author': Textarea(attrs={'cols': 10, 'rows': 20}),
+            'text': Textarea(attrs={
+                'class': "form-control"
+                }),
         }
 
 class EditForm(forms.ModelForm):
@@ -55,8 +57,3 @@ class EditForm(forms.ModelForm):
                     'readonly': True
                 }),
         }
-
-class FavoriteForm(forms.ModelForm):
-    class Meta:
-        model = Favorite
-        fields = ('user', 'created_date', 'movie')

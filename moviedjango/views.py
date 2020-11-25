@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Movie,Comment
 from django.urls import reverse
-from .forms import ImageForm,CommentForm,EditForm,FavoriteForm
+from .forms import ImageForm,CommentForm,EditForm
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -65,6 +65,7 @@ def movie_comment(request, pk):
         if form.is_valid():
             comment = form.save(commit=False)
             comment.movie = movie
+            comment.author = request.user
             comment.save()
             return redirect('movie_detail', pk=pk)
     else:
