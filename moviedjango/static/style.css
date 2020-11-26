@@ -42,7 +42,8 @@ button.delete {
     color: #0f4c75;
 }
 
-.maintitle {
+.maintitle,
+a.dropdown-item {
     color: #0f4c75;
 }
 
