@@ -10,6 +10,11 @@ footer.page-footer  {
     box-sizing: content-box;
 }
 
+.nav-list-item button a.dropdown-item {
+    background-color: whitesmoke;
+
+}
+
 footer.page-footer {
     margin-top: 3rem;
 }
