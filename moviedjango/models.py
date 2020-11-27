@@ -10,7 +10,6 @@ class Movie(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(default=timezone.now) #models.DateTimeField(blank=True, null=True)
     movies = models.FileField(upload_to='images/', blank=False, null=False)
-    taggs = models.TextField(max_length=500, null=True)
 
     def publish(self):
         self.published_date = timezone.now()
@@ -63,6 +62,9 @@ class Tag(models.Model):
     tag = models.CharField(max_length=20)
     created_date = models.DateTimeField(default=timezone.now)
     updated_date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['movie', 'tag'], name='duplicate_taggs')]
 
     def __str__(self):
         return self.tag

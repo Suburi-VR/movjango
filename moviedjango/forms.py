@@ -6,7 +6,7 @@ from django.utils import timezone
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Movie
-        fields = ('title','movies', 'overview','published_date', 'taggs')
+        fields = ('title','movies', 'overview','published_date')
         widgets = {
                 'title': TextInput(attrs={
                     'class': "form-control",
@@ -21,9 +21,6 @@ class ImageForm(forms.ModelForm):
                     'readonly': True
                 }),
                 'movies': FileInput(attrs={
-                    'class': "form-control-file"
-                }),
-                'taggs': Textarea(attrs={
                     'class': "form-control-file"
                 })
         }
