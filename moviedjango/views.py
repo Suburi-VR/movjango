@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import Movie,Comment
+from .models import Movie,Comment,Tag
 from django.urls import reverse
-from .forms import ImageForm,CommentForm,EditForm
+from .forms import ImageForm,CommentForm,EditForm,TagForm
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -40,7 +40,8 @@ def movie_detail(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
     faveored_or_not = movie.favored_by(request.user)
     comments = Comment.objects.filter(movie = movie)
-    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'faveored': faveored_or_not})
+    taggs = Tag.objects.filter(movie = movie)
+    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'faveored': faveored_or_not, 'taggs': taggs})
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):
@@ -84,7 +85,6 @@ def movie_edit(request, pk):
     if request.method == 'POST':
         form = EditForm(request.POST)
         if form.is_valid():
-            author = movie.author
             movie.title = request.POST["title"]
             movie.overview = request.POST["overview"]
             movie.save()
@@ -159,6 +159,19 @@ def for_s3(request):
     s3.put_object(Bucket='moviedjango', Body=request.FILES['movies'], Key=filename, ACL='public-read')
     return f'https://moviedjango.s3-ap-northeast-1.amazonaws.com/{filename}'
 
+def tag(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            tag = form.save(commit=False)
+            tag.movie = movie
+            tag.author = movie.author
+            tag.save()
+            return redirect('movie_detail', pk=pk)
+    else:
+        form = TagForm()
+    return render(request, 'tag.html', {'form': form})
 
 
 
