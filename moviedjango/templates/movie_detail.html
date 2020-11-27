@@ -22,12 +22,21 @@
                         <p>概要：</p>
                         <p>{{ movie.overview }}</p>
                     </div>
+<<<<<<< HEAD
                     <div class="taggs" style="width:1080px">
                         <p>タグ：
                             {% for tag in taggs %}
                                 <a class="btn btn-primary" href="#" role="button">{{tag}}</a>
                             {% endfor %}
                         </p>
+=======
+                    <div class="tag" style="width:1080px"　display="inline-block">
+                        タグ：
+                        {% for tag in taggs %}
+                            <a class="btn btn-primary" href="#" role="button">{{ tag.tag }}</a>
+                        {% endfor %}
+                        <a href="{% url 'tag' pk=movie.pk %}">ADD TAGGS</a>
+>>>>>>> 9e0edd0d24bf95291bff96d777958895577fe80c
                     </div>
                     
                         <div class="row justify-content-end">
