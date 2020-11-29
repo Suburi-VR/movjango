@@ -40,8 +40,8 @@ def movie_detail(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
     faveored_or_not = movie.favored_by(request.user)
     comments = Comment.objects.filter(movie = movie)
-    taggs = Tag.objects.filter(movie = movie)
-    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'faveored': faveored_or_not, 'taggs': taggs})
+    tags = Tag.objects.filter(movies = movie)
+    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'faveored': faveored_or_not, 'tags': tags})
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):
@@ -165,12 +165,14 @@ def tag(request, pk):
         form = TagForm(request.POST)
         if form.is_valid():
             tag = form.save(commit=False)
-            tag.movie = movie
-            tag.author = movie.author
             tag.save()
+            tag.movies.add(movie)
+            print(dir(Tag.objects))
             return redirect('movie_detail', pk=pk)
     else:
         form = TagForm()
+    
+    print({'form': form})
     return render(request, 'tag.html', {'form': form})
 
 

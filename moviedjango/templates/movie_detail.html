@@ -24,7 +24,7 @@
                     </div>
                     <div class="tag" style="width:1080px"　display="inline-block">
                         タグ：
-                        {% for tag in taggs %}
+                        {% for tag in tags %}
                             <a class="btn btn-primary" href="#" role="button">{{ tag.tag }}</a>
                         {% endfor %}
                         <a href="{% url 'tag' pk=movie.pk %}">ADD TAGGS</a>
