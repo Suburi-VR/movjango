@@ -163,16 +163,15 @@ def tag(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     if request.method == 'POST':
         form = TagForm(request.POST)
-        if form.is_valid():
-            tag = form.save(commit=False)
-            tag.save()
-            tag.movies.add(movie)
-            print(dir(Tag.objects))
-            return redirect('movie_detail', pk=pk)
+        tag = form.save(commit=False)
+        tags = Tag.objects.all()
+        print(list(tags))
+        tag.save()
+        tag.movies.add(movie)
+        print(tag.movies)
+        return redirect('movie_detail', pk=pk)
     else:
         form = TagForm()
-    
-    print({'form': form})
     return render(request, 'tag.html', {'form': form})
 
 
