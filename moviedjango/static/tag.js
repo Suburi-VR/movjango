@@ -1,11 +1,4 @@
-const buttons = document.getElementById("tag");
-
-button.addEventListener('click', () => {
-    f.method = 'post';
-    
-
-
-
-
-
-})
+function button_click(){
+    const tag = document.getElementById("tag_input").value;
+    document.getElementById("tag").textContent = tag;
+}
