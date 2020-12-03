@@ -15,4 +15,8 @@ icons.forEach(icon => {
         document.body.append(f);
         f.submit();
     });
+    console.log(icon);
 });
+
+
+console.log(icons);

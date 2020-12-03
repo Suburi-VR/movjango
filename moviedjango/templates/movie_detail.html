@@ -22,12 +22,12 @@
                         <p>概要：</p>
                         <p>{{ movie.overview }}</p>
                     </div>
-                    <div class="tag" style="width:1080px"　display="inline-block">
-                        タグ：
-                        {% for tag in tags %}
-                            <a class="btn btn-primary" href="#" role="button">{{ tag.tag }}</a>
-                        {% endfor %}
-                        <a href="{% url 'tag' pk=movie.pk %}">ADD TAGGS</a>
+                    
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Input Tags" aria-label="Input Tags" aria-describedby="button-addon2" id="tag">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                        </div>
                     </div>
                     
                         <div class="row justify-content-end">
