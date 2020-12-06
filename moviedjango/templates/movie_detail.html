@@ -22,15 +22,12 @@
                         <p>概要：</p>
                         <p>{{ movie.overview }}</p>
                     </div>
-                    
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Input Tags" aria-label="Input Tags" aria-describedby="button-addon2" id="tag_input">
-                        <div class="input-group-append">
-                            <input class="btn btn-outline-secondary" value="Tag" type="button" id="button-addon2" onclick="button_click()">
+                    <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Input Tags" aria-label="Input Tags" aria-describedby="button-addon2" id="tag_input">
                         </div>
+                        <input class="btn btn-outline-secondary" value="Add" type="submit" id="button-addon2">
                     </div>
-                    <button class="btn btn-primary" id="tag"></button>
-                    
                         <div class="row justify-content-end">
                             <div class="col-1">
                                 {% if faveored %}

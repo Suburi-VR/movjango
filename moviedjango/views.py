@@ -17,6 +17,7 @@ import os
 import datetime
 
 
+
 @login_required(login_url='/accounts/login/')
 def toppage(request):
     if request.method == 'GET':
@@ -161,18 +162,17 @@ def for_s3(request):
 
 def tag(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
+    print(request.body)
     if request.method == 'POST':
         form = TagForm(request.POST)
         tag = form.save(commit=False)
-        tags = Tag.objects.all()
-        print(list(tags))
         tag.save()
         tag.movies.add(movie)
-        print(tag.movies)
-        return redirect('movie_detail', pk=pk)
-    else:
-        form = TagForm()
-    return render(request, 'tag.html', {'form': form})
+    return HttpResponse('{"message": "ok"}')
+
+def hoge(request):
+    print('hogehoge')
+    return HttpResponse('{"message": "ok", "hoge": 100}')
 
 
 
