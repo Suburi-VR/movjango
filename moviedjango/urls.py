@@ -18,4 +18,5 @@ urlpatterns = [
     path('movie/<int:pk>/favorite', views.favorite, name='favorite'),
     path('favorites/', views.favorites, name='favorites'),
     path('search/', views.search, name='search'),
+    # path('tag', views.tag, name='tag'),
 ]

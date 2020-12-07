@@ -15,6 +15,7 @@ from django.contrib import messages
 import boto3
 import os
 import datetime
+# from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -160,19 +161,17 @@ def for_s3(request):
     s3.put_object(Bucket='moviedjango', Body=request.FILES['movies'], Key=filename, ACL='public-read')
     return f'https://moviedjango.s3-ap-northeast-1.amazonaws.com/{filename}'
 
-def tag(request, pk):
-    movie = get_object_or_404(Movie, pk=pk)
-    print(request.body)
-    if request.method == 'POST':
-        form = TagForm(request.POST)
-        tag = form.save(commit=False)
-        tag.save()
-        tag.movies.add(movie)
-    return HttpResponse('{"message": "ok"}')
+# @csrf_exempt
+# def tag(request, pk):
+#     movie = get_object_or_404(Movie, pk=pk)
+#     print(request.body)
+#     if request.method == 'POST':
+#         form = TagForm(request.POST)
+#         tag = form.save(commit=False)
+#         tag.save()
+#         tag.movies.add(movie)
+#     return HttpResponse('{"message": "ok"}')
 
-def hoge(request):
-    print('hogehoge')
-    return HttpResponse('{"message": "ok", "hoge": 100}')
 
 
 
