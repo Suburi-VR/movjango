@@ -7,3 +7,5 @@ __pycache__
 staticfiles/*
 !staticfiles/.gitkeep
 .env
+
+**/.DS_Store
