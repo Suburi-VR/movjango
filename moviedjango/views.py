@@ -135,14 +135,13 @@ def favorites(request):
 
 def favorite(request, pk):
     if request.method != 'POST':
-        return HttpResponse('only POST request allowed.', status=405)
-
+        return HttpResponse('NG')
     movie = get_object_or_404(Movie, pk=pk)
     if movie.favored_by(request.user):
         movie.disfavor(request.user)
     else:
         movie.favor(request.user)
-    return redirect(request.META.get('HTTP_REFERER'))
+    return HttpResponse('OK')
 
 def search(request):
     movies = Movie.objects.order_by(-published_date)
