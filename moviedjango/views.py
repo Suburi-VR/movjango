@@ -15,7 +15,7 @@ from django.contrib import messages
 import boto3
 import os
 import datetime
-# from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -132,16 +132,19 @@ def favorites(request):
             'is_paginated': page.has_other_pages,}
     return render(request, 'favorites.html', dic)
 
-
+@csrf_exempt
 def favorite(request, pk):
     if request.method != 'POST':
         return HttpResponse('NG')
     movie = get_object_or_404(Movie, pk=pk)
     if movie.favored_by(request.user):
+        print("1")
         movie.disfavor(request.user)
     else:
+        print("2")
         movie.favor(request.user)
-    return HttpResponse('OK')
+    print("3")
+    return HttpResponse("OK")
 
 def search(request):
     movies = Movie.objects.order_by(-published_date)
