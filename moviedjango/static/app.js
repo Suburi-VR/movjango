@@ -8,9 +8,9 @@ let csrf = document.cookie.split(";").find((cookie)=>{
 icons.forEach(icon =>{
     icon.addEventListener('click', async (e) =>
     {
-        const result = await fetch(`favorite`,{
-            method: 'POST',
-            /* innerHTML: `<input type="hidden" name="csrfmiddlewaretoken" value="${csrf}" />`, */
-        });
+        const result = await fetch(`favorite`,{method: 'POST',});
+        const id = document.getElementById("fav-id");
+        const id2 = document.getElementById("fav-id2");
+        console.log(id);
     });
 });
