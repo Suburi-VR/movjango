@@ -9,8 +9,18 @@ icons.forEach(icon =>{
     icon.addEventListener('click', async (e) =>
     {
         const result = await fetch(`favorite`,{method: 'POST',});
-        const id = document.getElementById("fav-id");
-        const id2 = document.getElementById("fav-id2");
-        console.log(id);
+        const favored = document.getElementById('fav-id');
+        const disfavored = document.getElementById('fav-id2');
+        const fav_id_class = favored.classList;
+        const disfav_id_class = disfavored.classList;
+        if (fav_id_class.contains(hidden)) {
+            disfav_id_class.add('hidden');
+        }
+        else {
+            fav_id_class.add('hidden');
+            disfav_id_class.remove('hidden');
+        }
+        console.log(fav_id_class);
+
     });
 });

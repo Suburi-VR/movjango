@@ -112,3 +112,12 @@ flex-direction: column;
 .content {
 flex: 1;
 }
+
+
+.hidden {
+    display: none;
+}
+
+.hidden2 {
+    display: none;
+}
