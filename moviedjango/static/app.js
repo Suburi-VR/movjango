@@ -13,12 +13,14 @@ icons.forEach(icon =>{
         const disfavored = document.getElementById('fav-id2');
         const fav_id_class = favored.classList;
         const disfav_id_class = disfavored.classList;
-        if (fav_id_class.contains(hidden)) {
+        if (fav_id_class.contains('hidden')) {
             disfav_id_class.add('hidden');
+            fav_id_class.remove('hidden');
         }
         else {
             fav_id_class.add('hidden');
             disfav_id_class.remove('hidden');
+            fav_id_class.add('hidden');
         }
         console.log(fav_id_class);
 
