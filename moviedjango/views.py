@@ -45,7 +45,7 @@ def movie_detail(request, pk):
     faveored_or_not = movie.favored_by(request.user)
     comments = Comment.objects.filter(movie = movie)
     tags = Tag.objects.filter(movies = movie)
-    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'faveored': faveored_or_not, 'tags': tags})
+    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'favored': faveored_or_not, 'tags': tags})
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):
@@ -137,15 +137,33 @@ def favorites(request):
 @csrf_exempt
 def favorite(request, pk):
     if request.method != 'POST':
+        print("1")
         return HttpResponse('NG')
     movie = get_object_or_404(Movie, pk=pk)
+    print("2")
     if movie.favored_by(request.user):
-        print("1")
+        print("3")
         movie.disfavor(request.user)
     else:
-        print("2")
+        print("4")
         movie.favor(request.user)
-    print("3")
+    print("4")
+    return HttpResponse("OK")
+
+@csrf_exempt
+def favoritetop(request, pk):
+    if request.method != 'POST':
+        print("1")
+        return HttpResponse('NG')
+    movie = Movie.objects.all().filter(Movie, pk=pk)
+    print("2")
+    if movie.favored_by(request.user):
+        print("3")
+        movie.disfavor(request.user)
+    else:
+        print("4")
+        movie.favor(request.user)
+    print("4")
     return HttpResponse("OK")
 
 def search(request):

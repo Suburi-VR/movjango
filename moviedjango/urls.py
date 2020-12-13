@@ -16,6 +16,7 @@ urlpatterns = [
     path('accounts/logout/', views.logout_view, name='logout'),
     path('accounts/signup/', views.signup_view, name='signup'),
     path('movie/<int:pk>/favorite', views.favorite, name='favorite'),
+    path('movie/<int:pk>/favorite/', views.favoritetop, name='favorite_top'),
     path('favorites/', views.favorites, name='favorites'),
     path('search/', views.search, name='search'),
     # path('tag', views.tag, name='tag'),
