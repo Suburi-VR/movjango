@@ -1,4 +1,5 @@
 const icons = Array.from(document.getElementsByClassName("favorite-icon"));
+console.log(icons)
 
 /* let CSRF_KEY_NAME="csrftoken=";
 let csrf = document.cookie.split(";").find((cookie)=>{
@@ -26,11 +27,12 @@ icons.forEach(icon =>{
 });
 
 const iconstop = Array.from(document.getElementsByClassName("favorite-icon-top"));
+console.log(iconstop)
 
 iconstop.forEach(icontop =>{
     icontop.addEventListener('click', async (e) =>
     {
-        const result = await fetch(`favorite`,{method: 'POST',});
+        const result = await fetch(`favorite_top`,{method: 'POST',});
         const favored = document.getElementById('fav-id');
         const disfavored = document.getElementById('fav-id2');
         const fav_id_class = favored.classList;
@@ -38,11 +40,13 @@ iconstop.forEach(icontop =>{
         if (fav_id_class.contains('hidden')) {
             disfav_id_class.add('hidden');
             fav_id_class.remove('hidden');
+            console.log("aaa");
         }
         else {
             fav_id_class.add('hidden');
             disfav_id_class.remove('hidden');
             fav_id_class.add('hidden');
+            console.log("bbb");
         }
     });
 });

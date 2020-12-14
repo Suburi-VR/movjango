@@ -137,33 +137,28 @@ def favorites(request):
 @csrf_exempt
 def favorite(request, pk):
     if request.method != 'POST':
-        print("1")
         return HttpResponse('NG')
     movie = get_object_or_404(Movie, pk=pk)
-    print("2")
     if movie.favored_by(request.user):
-        print("3")
         movie.disfavor(request.user)
     else:
-        print("4")
         movie.favor(request.user)
-    print("4")
     return HttpResponse("OK")
 
 @csrf_exempt
-def favoritetop(request, pk):
+def favorite_top(request):
     if request.method != 'POST':
         print("1")
         return HttpResponse('NG')
-    movie = Movie.objects.all().filter(Movie, pk=pk)
-    print("2")
-    if movie.favored_by(request.user):
-        print("3")
-        movie.disfavor(request.user)
-    else:
+    movies = Movie.objects.prefetch_related('favorite_set').all().order_by('-published_date')
+    for movie in movies:
+        if movie.favored_by(request.user):
+            print("2")
+            movie.disfavor(request.user)
+        else:
+            print("3")
+            movie.favor(request.user)
         print("4")
-        movie.favor(request.user)
-    print("4")
     return HttpResponse("OK")
 
 def search(request):
