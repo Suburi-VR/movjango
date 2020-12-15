@@ -39,7 +39,7 @@ iconstop.forEach(icontop =>{
 
         const fav_id_class = favored.classList;
         const disfav_id_class = disfavored.classList;
-        console.log(iconstop);
+        console.log(icontop)
 
         if (fav_id_class.contains('hidden')) {
             disfav_id_class.add('hidden');
