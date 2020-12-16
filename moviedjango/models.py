@@ -55,7 +55,7 @@ class Favorite(models.Model):
 
     def __str__(self):
         return f'{str(self.user)} favor in 『{str(self.movie)}』'
-        
+
 class Tag(models.Model):
     tag = models.CharField(max_length=20)
     movies = models.ManyToManyField(Movie)

@@ -146,12 +146,28 @@ def favorite(request, pk):
     return HttpResponse("OK")
 
 def search(request):
-    movies = Movie.objects.order_by(-published_date)
-    keyword = request.GET.get('keyword')
-    if keyword:
-        movies = movies.filter(Q(title__icontains=keyword))
-        messages.success(request,'「{}」のMOVIES'.format(keyword))
-    return render(request, 'toppage.html', {'movies': movies})
+    if request.method == 'GET':
+        keyword = request.GET.get('keyword')
+        if keyword:
+            messages.success(request,'「{}」のMOVIES'.format(keyword))
+        page_num = request.GET.get('p', 1)
+        pagenator = Paginator(Movie.objects.prefetch_related('favorite_set').filter(Q(title__icontains=keyword)).order_by('-published_date'), 20)
+        print(Q(title__icontains=keyword))
+        try:
+            page = pagenator.page(page_num)
+            movies = page.object_list
+            faveored_or_not = [movie.favored_by(request.user) for movie in movies]
+        except PageNotAnInteger:
+            page = pagenator.page(1)
+        except EmptyPage:
+            page = pagenator.page(pagenator.num_pages)
+   
+    dic = {
+        'page_obj': page,
+        'movies': [(movie,favorite) for movie,favorite in zip(movies, faveored_or_not)],
+        'is_paginated': page.has_other_pages,
+    }
+    return render(request, 'search.html', dic)
 
 
 def for_s3(request):
