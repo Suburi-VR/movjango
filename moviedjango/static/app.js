@@ -29,28 +29,24 @@ icons.forEach(icon =>{
 const iconstop = Array.from(document.getElementsByClassName("favorite-icon-top"));
 
 iconstop.forEach(icontop =>{
-    
     icontop.addEventListener('click', async (e) =>
     {
         const result = await fetch(`/movie/${icontop.dataset.movieid}/favorite`,{method: 'POST',});
 
-        const favored = document.getElementById('fav-id');
-        const disfavored = document.getElementById('fav-id2');
-
+        const favored = document.getElementById(`fav${icontop.dataset.movieid}`);
+        const disfavored = document.getElementById(`disfav${icontop.dataset.movieid}`);
+        console.log(favored)
         const fav_id_class = favored.classList;
         const disfav_id_class = disfavored.classList;
-        console.log(icontop)
 
         if (fav_id_class.contains('hidden')) {
             disfav_id_class.add('hidden');
             fav_id_class.remove('hidden');
-            console.log("aaa");
         }
         else {
             fav_id_class.add('hidden');
             disfav_id_class.remove('hidden');
             fav_id_class.add('hidden');
-            console.log("bbb");
         }
     });
 });
