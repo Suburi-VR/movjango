@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Movie,Comment,Tag
 from django.urls import reverse
-from .forms import ImageForm,CommentForm,EditForm,TagForm
+from .forms import ImageForm,EditForm,TagForm
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -63,19 +63,11 @@ def movie_form(request):
     return render(request, 'movie_form.html', {'form': form})
 
 @login_required(login_url='/accounts/login/')
-def movie_comment(request, pk):
+def comment(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.movie = movie
-            comment.author = request.user
-            comment.save()
-            return redirect('movie_detail', pk=pk)
-    else:
-        form = CommentForm()
-    return render(request, 'movie_comment.html', {'form': form})
+    movie.commented(request.user)
+    print("1")
+    return HttpResponse("OK")
 
 @login_required(login_url='/accounts/login/')
 def delete(request, pk):
@@ -145,14 +137,19 @@ def favorite(request, pk):
         movie.favor(request.user)
     return HttpResponse("OK")
 
+def disfav(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    if movie.favored_by(request.user):
+        movie.disfavor(request.user)
+    return redirect(request.META.get('HTTP_REFERER'))
+
 def search(request):
     if request.method == 'GET':
         keyword = request.GET.get('keyword')
         if keyword:
             messages.success(request,'「{}」のMOVIES'.format(keyword))
         page_num = request.GET.get('p', 1)
-        pagenator = Paginator(Movie.objects.prefetch_related('favorite_set').filter(Q(title__icontains=keyword)).order_by('-published_date'), 20)
-        print(Q(title__icontains=keyword))
+        pagenator = Paginator(Movie.objects.prefetch_related('favorite_set').filter(Q(title__icontains=keyword)|Q(overview__icontains=keyword)).order_by('-published_date'), 20)
         try:
             page = pagenator.page(page_num)
             movies = page.object_list

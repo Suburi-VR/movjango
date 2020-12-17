@@ -31,6 +31,12 @@ class Movie(models.Model):
         fs = self.favorite_set.filter(user=user)
         fs[0].delete()
 
+    def commented(self, user):
+        comment = Comment()
+        comment.movie = self
+        comment.author = user
+        comment.save()
+
     def __str__(self):
         return self.title
 

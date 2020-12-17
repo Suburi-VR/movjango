@@ -48,18 +48,23 @@
                     </div>
                     
                 
-                    <div class="comment">
-                        <div class="surver">
-                            <button type="button" class="edit-button btn rounded-0" style="width:100px"><a href="{% url 'movie_comment' pk=movie.pk %}">COMMENT</a></button>
-                        </div>
-                            {% for comment in comments %}
-                                <div class="comment" style="width:1080px">
-                                    <strong>NAME : {{ comment.author }}</strong>
-                                    <p>{{ comment.text }}</p>
-                                </div>
-                            {% endfor %}
+                    <nav class="navbar justify-content-md-end">
+                        <form action="movie_detail" method="POST">
+                            <input type="text" class="comment-text">
+                            <button type="submit" class="edit-button btn rounded-0 comment_send" style="width:100px" ID="comment_send">
+                                <a href="{% url 'comment' pk=movie.pk %}">COMMENT</a>
+                            </button>
+                        </form>
+                    </nav>
 
-                    </div>
+                        {% for comment in comments %}
+                            <div class="comment" style="width:1080px">
+                                <strong>NAME : {{ comment.author }}</strong>
+                                <p>{{ comment.text }}</p>
+                            </div>
+                        {% endfor %}
+
+
             </div>
     </div>
 {% endblock %}

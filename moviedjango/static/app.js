@@ -1,10 +1,4 @@
 const icons = Array.from(document.getElementsByClassName("favorite-icon"));
-
-/* let CSRF_KEY_NAME="csrftoken=";
-let csrf = document.cookie.split(";").find((cookie)=>{
-    return cookie.trim().substr(0, CSRF_KEY_NAME.length) == CSRF_KEY_NAME;
-}).substr(CSRF_KEY_NAME.length); */
-
 icons.forEach(icon =>{
     icon.addEventListener('click', async (e) =>
     {
@@ -24,9 +18,6 @@ icons.forEach(icon =>{
         }
     });
 });
-
-
-
 
 const iconstop = Array.from(document.getElementsByClassName("favorite-icon-top"));
 iconstop.forEach(icontop =>{
@@ -49,25 +40,8 @@ iconstop.forEach(icontop =>{
     });
 });
 
-
-
-
-const iconsfav = Array.from(document.getElementsByClassName("favorite-icon-fav"));
-iconsfav.forEach(iconfav =>{
-    iconfav.addEventListener('click', async (e) =>
-    {
-        const result = await fetch(`/movie/${iconfav.dataset.movieid}/favorite`,{method: 'POST',});
-        const favored = document.getElementById(`fav${iconfav.dataset.movieid}`);
-
-        const fav_id_class = favored.classList;
-        if (!fav_id_class.contains('hidden')) {
-            fav_id_class.add('hidden');
-            const movies = Array.from(document.getElementsByClassName("favorite_movies"));
-            movies.forEach(movie =>{
-                const favoredmov = document.getElementById(`favmov${iconfav.dataset.movieid}`);
-                const favoredmov_id_class = favoredmov.classList;
-                favoredmov_id_class.add('hidden');
-            });
-        }
-    });
+const comment_send = document.getElementById("comment_send");
+comment_send.addEventListener('click', async (e) =>
+{
+    const result = await fetch('comment',{method: 'POST',});
 });
