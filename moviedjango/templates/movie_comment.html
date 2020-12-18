@@ -1,0 +1,20 @@
+<!-- {% extends 'base.html' %}
+{% block content %}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {% for item in form %}
+            <div class="form-group">
+                <label for="{{item.id_for_label}}">{{item.label}}</label>
+                {{item}}
+            </div>
+        {% endfor %}
+
+
+        <div class="button">
+            <button type="submit" class="save btn rounded-0" style="width:100px">SEND</button>
+        </div>
+        {{form.errors}}
+    </form>
+
+{% endblock %} 
+ -->

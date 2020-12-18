@@ -1,8 +1,7 @@
 const icons = Array.from(document.getElementsByClassName("favorite-icon"));
 icons.forEach(icon =>{
-    icon.addEventListener('click', async (e) =>
-    {
-        const result = await fetch(`favorite`,{method: 'POST',});
+    icon.addEventListener('click', async (e) => {
+        const result = await fetch(`favorite`,{ method: 'POST' });
         const favored = document.getElementById('fav-id');
         const disfavored = document.getElementById('fav-id2');
         const fav_id_class = favored.classList;
@@ -21,27 +20,19 @@ icons.forEach(icon =>{
 
 const iconstop = Array.from(document.getElementsByClassName("favorite-icon-top"));
 iconstop.forEach(icontop =>{
-    icontop.addEventListener('click', async (e) =>
-    {
-        const result = await fetch(`/movie/${icontop.dataset.movieid}/favorite`,{method: 'POST',});
+    icontop.addEventListener('click', async (e) => {
+        const result = await fetch(`/movie/${icontop.dataset.movieid}/favorite`, { method: 'POST' });
         const favored = document.getElementById(`fav${icontop.dataset.movieid}`);
         const disfavored = document.getElementById(`disfav${icontop.dataset.movieid}`);
         const fav_id_class = favored.classList;
         const disfav_id_class = disfavored.classList;
-        if (fav_id_class.contains('hidden')) {
-            disfav_id_class.add('hidden');
-            fav_id_class.remove('hidden');
-        }
-        else {
-            fav_id_class.add('hidden');
-            disfav_id_class.remove('hidden');
-            fav_id_class.add('hidden');
-        }
+        disfav_id_class.toggle('hidden');
+        fav_id_class.toggle('hidden');
     });
 });
 
-const comment_send = document.getElementById("comment_send");
-comment_send.addEventListener('click', async (e) =>
-{
-    const result = await fetch('comment',{method: 'POST',});
+const commentSend = document.getElementById("comment_send");
+commentSend.addEventListener('click', async (e) => {
+    const name = input.value;
+    const result = await fetch('comment');
 });

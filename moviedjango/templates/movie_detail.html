@@ -49,11 +49,10 @@
                     
                 
                     <nav class="navbar justify-content-md-end">
-                        <form action="movie_detail" method="POST">
-                            <input type="text" class="comment-text">
-                            <button type="submit" class="edit-button btn rounded-0 comment_send" style="width:100px" ID="comment_send">
-                                <a href="{% url 'comment' pk=movie.pk %}">COMMENT</a>
-                            </button>
+                        <form action="comment" method="post">
+                            {% csrf_token %}
+                            <textarea name="text" id="com" cols="100"></textarea>
+                            <input type="submit" class="edit-button btn rounded-0 comment_send" style="width:100px" ID="comment_send"  value="COMMENT">
                         </form>
                     </nav>
 
