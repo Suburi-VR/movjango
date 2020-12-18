@@ -43,9 +43,17 @@ def toppage(request):
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
     faveored_or_not = movie.favored_by(request.user)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.movie = movie
+            comment.save()
+            return redirect('movie_detail', pk=pk)
+    else:
+        form = CommentForm()
     comments = Comment.objects.filter(movie = movie)
-    tags = Tag.objects.filter(movies = movie)
-    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'favored': faveored_or_not, 'tags': tags})
+    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'favored': faveored_or_not, 'form': form})
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):
@@ -61,18 +69,6 @@ def movie_form(request):
     else:
         form = ImageForm()
     return render(request, 'movie_form.html', {'form': form})
-
-@login_required(login_url='/accounts/login/')
-def comment(request, pk):
-    movie = get_object_or_404(Movie, pk=pk)
-    form = CommentForm()
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.movie = movie
-        comment.author = request.user
-        comment.save()
-        print(Comment.text)
-    return HttpResponse("OK")
 
 @login_required(login_url='/accounts/login/')
 def delete(request, pk):

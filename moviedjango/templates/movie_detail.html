@@ -48,13 +48,10 @@
                     </div>
                     
                 
-                    <nav class="navbar justify-content-md-end">
-                        <form action="comment" method="post">
-                            {% csrf_token %}
-                            <textarea name="text" id="com" cols="100"></textarea>
-                            <input type="submit" class="edit-button btn rounded-0 comment_send" style="width:100px" ID="comment_send"  value="COMMENT">
-                        </form>
-                    </nav>
+                    <div class="comment">
+                        <div class="main-comment-section">
+                            {% include 'comment.html' %}
+                        </div>
 
                         {% for comment in comments %}
                             <div class="comment" style="width:1080px">
@@ -62,7 +59,7 @@
                                 <p>{{ comment.text }}</p>
                             </div>
                         {% endfor %}
-
+                    </div>
 
             </div>
     </div>
