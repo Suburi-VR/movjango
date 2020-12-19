@@ -31,8 +31,8 @@ iconstop.forEach(icontop =>{
     });
 });
 
-// const commentSend = document.getElementById("comment_send");
-// commentSend.addEventListener('click', async (e) => {
-//     const name = input.value;
-//     const result = await fetch('comment');
-// });
+const commentSend = document.getElementById("comment_send");
+commentSend.addEventListener('click', async (e) => {
+    const result = await fetch('movie_detail',{method:"POST"});
+    
+});

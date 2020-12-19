@@ -16,7 +16,7 @@ import boto3
 import os
 import datetime
 from django.views.decorators.csrf import csrf_exempt
-from django.http.response import JsonResponse
+from django.http import JsonResponse
 
 
 
@@ -49,11 +49,14 @@ def movie_detail(request, pk):
             comment = form.save(commit=False)
             comment.movie = movie
             comment.save()
-            return redirect('movie_detail', pk=pk)
     else:
         form = CommentForm()
-    comments = Comment.objects.filter(movie = movie)
-    return render(request, 'movie_detail.html', {'movie':movie, 'comments':comments, 'favored': faveored_or_not, 'form': form})
+    comments = Comment.objects.filter(movie = movie).order_by('-created_date')
+    dic = {'movie':movie, 'comments':comments, 'favored': faveored_or_not, 'form': form}
+    if request.is_ajax():
+        html = render_to_string('comment.html', dic, request=request)
+        return JsonResponse({'form': html})
+    return render(request, 'movie_detail.html', dic)
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):
