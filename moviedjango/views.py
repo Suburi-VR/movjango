@@ -16,7 +16,7 @@ import boto3
 import os
 import datetime
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.http.response import JsonResponse
 
 
 
@@ -40,23 +40,31 @@ def toppage(request):
             'is_paginated': page.has_other_pages,}
     return render(request, 'toppage.html', ctx)
 
+@csrf_exempt
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
     faveored_or_not = movie.favored_by(request.user)
+    comments = Comment.objects.filter(movie = movie).order_by('-created_date')
     if request.method == 'POST':
+        print("11111")
         form = CommentForm(request.POST)
         if form.is_valid():
+            print("22222")
             comment = form.save(commit=False)
             comment.movie = movie
             comment.save()
     else:
+        print("33333")
         form = CommentForm()
-    comments = Comment.objects.filter(movie = movie).order_by('-created_date')
+    print("44444")
     dic = {'movie':movie, 'comments':comments, 'favored': faveored_or_not, 'form': form}
     if request.is_ajax():
+        print("55555")
         html = render_to_string('comment.html', dic, request=request)
         return JsonResponse({'form': html})
-    return render(request, 'movie_detail.html', dic)
+    print("66666")
+    return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
+
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):

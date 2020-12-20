@@ -110,6 +110,33 @@
         </footer>
   <!-- Footer -->
         <script src="{% static 'app.js' %}"></script>
+
+        <!-- ここから下、サイトの丸パクリ状態…。 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(event){
+                console.log("aaaaaa")
+            // いいねを省略しています
+            
+                $(document).on('submit', '.comment-form', function(event){
+                    console.log("bbbbbb")
+                    event.preventDefault();
+                    console.log($(this).serialize());
+                    $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response){
+                        $('.main-comment-section').html(response['form']);
+                    },
+                    error: function(rs, e){
+                        console.log(rs.responseText);
+                    },
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
 
