@@ -115,11 +115,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(event){
-                console.log("aaaaaa")
             // いいねを省略しています
             
                 $(document).on('submit', '.comment-form', function(event){
-                    console.log("bbbbbb")
                     event.preventDefault();
                     console.log($(this).serialize());
                     $.ajax({
@@ -129,6 +127,7 @@
                     dataType: 'json',
                     success: function(response){
                         $('.main-comment-section').html(response['form']);
+                        console.log("yatta---")
                     },
                     error: function(rs, e){
                         console.log(rs.responseText);

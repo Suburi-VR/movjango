@@ -17,6 +17,7 @@ import os
 import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
+from django.template.loader import render_to_string
 
 
 
@@ -52,6 +53,7 @@ def movie_detail(request, pk):
             print("22222")
             comment = form.save(commit=False)
             comment.movie = movie
+            comment.author = request.user
             comment.save()
     else:
         print("33333")

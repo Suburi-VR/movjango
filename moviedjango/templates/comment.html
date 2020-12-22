@@ -1,5 +1,12 @@
 <form method="POST" action="." class="comment-form form-inline">
-    <button type="submit" class="btn-sm btn-outline-secondary col-1">投稿</button>
-    <label class="sr-only" for="id_text">コメント</label>
-    <textarea name="text" class="form-control-sm col-11"　placeholder="コメントする..." required="true" id="id_text"></textarea>
+        <button type="submit" class="btn-sm btn-outline-secondary col-1">COMMENT</button>
+        <div class="form-group">
+            <textarea name="text" class="form-control-sm col-11"　placeholder="コメントする..." required="true" id="id_text" style="width:1080px"></textarea>
+        </div>
 </form>
+{% for comment in comments %}
+    <div class="comment" style="width:1080px">
+        <strong>NAME : {{ comment.author }}</strong>
+        <p>{{ comment.text }}</p>
+    </div>
+{% endfor %}

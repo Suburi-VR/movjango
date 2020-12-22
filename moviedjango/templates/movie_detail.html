@@ -45,20 +45,12 @@
                         <div class="row justify-content-md-center">
                             <video class="border border-secondary" src="{{ movie.movies }}" type="video/mp4; codecs='avc.1.640029, mp4a.40.2'" controls style="width:1280px;height:720px"></video>
                         </div>
-                    </div>
+                    
                     
                 
-                    <div class="comment">
                         <div class="main-comment-section">
                             {% include 'comment.html' %}
                         </div>
-
-                        {% for comment in comments %}
-                            <div class="comment" style="width:1080px">
-                                <strong>NAME : {{ comment.author }}</strong>
-                                <p>{{ comment.text }}</p>
-                            </div>
-                        {% endfor %}
                     </div>
 
             </div>

@@ -55,7 +55,8 @@ class CommentForm(forms.ModelForm):
             'text': Textarea(attrs={
                 'class': "form-control",
                 'rows': 1,
-                'id_text':'COMMENT'
+                'id_text': 'COMMENT',
+                'cols': 160
                 }),
         }
 
