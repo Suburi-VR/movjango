@@ -112,7 +112,7 @@
         <script src="{% static 'app.js' %}"></script>
 
         <!-- ここから下、サイトの丸パクリ状態…。 -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(event){
             // いいねを省略しています
@@ -127,7 +127,6 @@
                     dataType: 'json',
                     success: function(response){
                         $('.main-comment-section').html(response['form']);
-                        console.log("yatta---")
                     },
                     error: function(rs, e){
                         console.log(rs.responseText);
@@ -135,7 +134,7 @@
                     });
                 });
             });
-        </script>
+        </script> -->
     </body>
 </html>
 

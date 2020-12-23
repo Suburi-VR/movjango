@@ -31,11 +31,11 @@ iconstop.forEach(icontop =>{
     });
 });
 
-/* const commentSend = document.getElementById("comment_send");
-console.log("aaa")
-commentSend.addEventListener('click', async (e) => {
-    console.log("bbb")
-    const result = await fetch('comment',{method:"POST"});
-    console.log("ccc")
-    
-}); */
+const commentSend = Array.from(document.getElementsByClassName("comment-form"));
+console.log(commentSend);
+commentSend.forEach(comment => {
+    comment.addEventListener('click', async (e) => {
+        event.preventDefault();
+        console.log(this.serialize());
+    });
+});
