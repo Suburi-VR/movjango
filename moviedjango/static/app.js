@@ -36,10 +36,11 @@ console.log(commentSend);
 commentSend.forEach(comment => {
     comment.addEventListener('click', async (e) => {
         event.preventDefault();
+        const result = await fetch(`/movie/${comment.dataset.movieid}/`,{ method: 'POST' });
+        console.log(comment.dataset.movieid)
         console.log($(this).serialize());
         const datatype = 'json';
-        function $(response){
-            $('.main-comment-section').html(response['form']);
-        }
+        console.log(document.getElementById("id_text").value)
+        $('.commentarea').html(response['form']);
     });
 });
