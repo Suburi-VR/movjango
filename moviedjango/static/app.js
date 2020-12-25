@@ -36,6 +36,10 @@ console.log(commentSend);
 commentSend.forEach(comment => {
     comment.addEventListener('click', async (e) => {
         event.preventDefault();
-        console.log(this.serialize());
+        console.log($(this).serialize());
+        const datatype = 'json';
+        function $(response){
+            $('.main-comment-section').html(response['form']);
+        }
     });
 });
