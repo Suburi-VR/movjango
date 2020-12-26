@@ -1,8 +1,11 @@
-<form method="POST" action="." class="form-inline">
-        <button type="submit" class="btn-sm btn-outline-secondary col-1 comment-form">COMMENT</button>
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    {% for item in form %}
         <div class="form-group">
-            <textarea name="text" class="form-control-sm col-11 commentarea"　placeholder="コメントする..." required="true" id="id_text" style="width:1080px" value=""></textarea>
+            {{item}}
         </div>
+    {% endfor %}
+    <button type="submit" class="btn-sm btn-outline-secondary col-1 comment-send">COMMENT</button>
 </form>
 {% for comment in comments %}
     <div class="comment" style="width:1080px">

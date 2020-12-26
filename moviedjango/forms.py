@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import Select, Textarea, TextInput, HiddenInput, FileInput
-from .models import Movie, Favorite,Comment,Tag
+from .models import Movie, Favorite,Comment
 from django.utils import timezone
 
 class ImageForm(forms.ModelForm):
@@ -55,17 +55,6 @@ class CommentForm(forms.ModelForm):
             'text': Textarea(attrs={
                 'class': "form-control",
                 'rows': 1,
-                'id_text': 'COMMENT',
                 'cols': 160
                 }),
-        }
-
-class TagForm(forms.ModelForm):
-    class Meta:
-        model = Tag
-        fields = ('tag',)
-        widgets = {
-            'tag': TextInput(attrs={
-                'class': "form-control"
-                })
         }

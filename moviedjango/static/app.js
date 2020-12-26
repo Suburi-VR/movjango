@@ -31,16 +31,10 @@ iconstop.forEach(icontop =>{
     });
 });
 
-const commentSend = Array.from(document.getElementsByClassName("comment-form"));
+const commentSend = Array.from(document.getElementsByClassName("comment-send"));
 console.log(commentSend);
 commentSend.forEach(comment => {
     comment.addEventListener('click', async (e) => {
-        event.preventDefault();
-        const result = await fetch(`/movie/${comment.dataset.movieid}/`,{ method: 'POST' });
-        console.log(comment.dataset.movieid)
-        console.log($(this).serialize());
-        const datatype = 'json';
-        console.log(document.getElementById("id_text").value)
-        $('.commentarea').html(response['form']);
+        const result = await fetch(`comment`,{ method: 'POST' });
     });
 });

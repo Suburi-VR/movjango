@@ -9,6 +9,7 @@ urlpatterns = [
     path('', views.toppage, name='toppage'),
     path('movie/movie_form/', views.movie_form, name='movie_form'),
     path('movie/<int:pk>/', views.movie_detail, name='movie_detail'),
+    path('movie/<int:pk>/comment', views.comment, name='comment'),
     path('movie/<int:pk>/edit/delete/', views.delete, name='delete'),
     path('movie/<int:pk>/edit/', views.movie_edit, name='movie_edit'),
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),

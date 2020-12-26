@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import Movie,Comment,Tag
+from .models import Movie,Comment
 from django.urls import reverse
-from .forms import ImageForm,EditForm,CommentForm, TagForm
+from .forms import ImageForm,EditForm,CommentForm
 from django.utils import timezone
 from django.views.generic import TemplateView
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -46,26 +46,30 @@ def movie_detail(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
     faveored_or_not = movie.favored_by(request.user)
     comments = Comment.objects.filter(movie = movie).order_by('-created_date')
+    form = CommentForm(request.POST)
+    return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
+
+@csrf_exempt
+def comment(request, pk):
+    movie = get_object_or_404(Movie,pk=pk)
+    form = CommentForm(request.POST)
     if request.method == 'POST':
         print("11111")
-        form = CommentForm(request.POST)
         if form.is_valid():
             print("22222")
             comment = form.save(commit=False)
             comment.movie = movie
             comment.author = request.user
             comment.save()
+        else:
+            print(form.errors)
     else:
         print("33333")
         form = CommentForm()
     print("44444")
-    dic = {'movie':movie, 'comments':comments, 'favored': faveored_or_not, 'form': form}
-    if request.is_ajax():
-        print("55555")
-        html = render_to_string('comment.html', dic, request=request)
-        return JsonResponse({'form': html})
+    dic = {'comment': comment}
     print("66666")
-    return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
+    return render(request, 'comment.html', dic)
 
 
 @login_required(login_url='/accounts/login/')
