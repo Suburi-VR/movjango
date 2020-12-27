@@ -1,4 +1,5 @@
 const icons = Array.from(document.getElementsByClassName("favorite-icon"));
+console.log(icons)
 icons.forEach(icon =>{
     icon.addEventListener('click', async (e) => {
         const result = await fetch(`favorite`,{ method: 'POST' });
@@ -33,8 +34,9 @@ iconstop.forEach(icontop =>{
 
 const commentSend = Array.from(document.getElementsByClassName("comment-send"));
 console.log(commentSend);
-commentSend.forEach(comment => {
+commentSend.forEach(comment =>{
     comment.addEventListener('click', async (e) => {
-        const result = await fetch(`comment`,{ method: 'POST' });
+        const result = await fetch(`comment_send`,{method: 'POST'});
+        console.log("OK")
     });
 });

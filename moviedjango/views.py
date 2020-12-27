@@ -50,26 +50,25 @@ def movie_detail(request, pk):
     return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
 
 @csrf_exempt
-def comment(request, pk):
-    movie = get_object_or_404(Movie,pk=pk)
-    form = CommentForm(request.POST)
+def comment_send(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
     if request.method == 'POST':
-        print("11111")
+        print("1")
+        form = CommentForm(request.POST)
         if form.is_valid():
-            print("22222")
+            print("2")
             comment = form.save(commit=False)
             comment.movie = movie
-            comment.author = request.user
             comment.save()
-        else:
-            print(form.errors)
     else:
-        print("33333")
+        print("3")
         form = CommentForm()
-    print("44444")
-    dic = {'comment': comment}
-    print("66666")
-    return render(request, 'comment.html', dic)
+    print("4")
+    if request.is_ajax():
+       html = render_to_string('comment.html', {"form": form}, request=request )
+       return JsonResponse({'form': html}) 
+    return HttpResponse("END")
+
 
 
 @login_required(login_url='/accounts/login/')

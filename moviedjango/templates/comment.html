@@ -1,11 +1,11 @@
-<form method="POST" class="post-form">
+<form method="POST" action="comment_send" class="post-form">
     {% csrf_token %}
     {% for item in form %}
         <div class="form-group">
             {{item}}
         </div>
     {% endfor %}
-    <button type="submit" class="btn-sm btn-outline-secondary col-1 comment-send">COMMENT</button>
+    <button type="submit" class="btn-sm btn-outline-secondary col-1 comment-send" id="commen-send">COMMENT</button>
 </form>
 {% for comment in comments %}
     <div class="comment" style="width:1080px">
