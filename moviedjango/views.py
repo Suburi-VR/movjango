@@ -59,14 +59,16 @@ def comment_send(request, pk):
             print("2")
             comment = form.save(commit=False)
             comment.movie = movie
+            comment.author = request.user
             comment.save()
     else:
         print("3")
         form = CommentForm()
     print("4")
     if request.is_ajax():
-       html = render_to_string('comment.html', {"form": form}, request=request )
-       return JsonResponse({'form': html}) 
+        print("aaaaaaaaaa")
+        html = render_to_string('comment.html', {"form": form}, request=request )
+        return JsonResponse({'form': html}) 
     return HttpResponse("END")
 
 

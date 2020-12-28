@@ -39,15 +39,12 @@ commentSend.addEventListener('click', async (e) => {
     $.ajax({
         type: 'POST',
         url: $(this).attr('action'),
-        data: $(this).serialize(),
-        dataType: 'json',
-        success: function(response){
-            $('.comment').html(response['comment']);
-            console.log("OK");
-        },
-        error: function(rs, e){
-            console.log(rs.responseText);
-            console.log("NG");
-        },
+    })
+    .then(
+        function(response){
+        $('.main-comment-section').html(response['form']);
+    },
+        function(rs, e){
+        console.log(rs.responseText);
     });
 });
