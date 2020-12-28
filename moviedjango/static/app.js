@@ -32,11 +32,22 @@ iconstop.forEach(icontop =>{
     });
 });
 
-const commentSend = Array.from(document.getElementsByClassName("comment-send"));
+const commentSend = document.getElementById("comment-send");
 console.log(commentSend);
-commentSend.forEach(comment =>{
-    comment.addEventListener('click', async (e) => {
-        const result = await fetch(`comment_send`,{method: 'POST'});
-        console.log("OK")
+commentSend.addEventListener('click', async (e) => {
+    const result = await fetch(`comment_send`,{method: 'POST'});
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response){
+            $('.comment').html(response['comment']);
+            console.log("OK");
+        },
+        error: function(rs, e){
+            console.log(rs.responseText);
+            console.log("NG");
+        },
     });
 });
