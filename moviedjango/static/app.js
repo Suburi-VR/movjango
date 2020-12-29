@@ -1,7 +1,6 @@
 const icons = Array.from(document.getElementsByClassName("favorite-icon"));
-console.log(icons)
 icons.forEach(icon =>{
-    icon.addEventListener('click', async (e) => {
+    icon.addEventListener('click', async () => {
         const result = await fetch(`favorite`,{ method: 'POST' });
         const favored = document.getElementById('fav-id');
         const disfavored = document.getElementById('fav-id2');
@@ -32,19 +31,46 @@ iconstop.forEach(icontop =>{
     });
 });
 
-const commentSend = document.getElementById("comment-send");
-console.log(commentSend);
-commentSend.addEventListener('click', async (e) => {
-    const result = await fetch(`comment_send`,{method: 'POST'});
-    $.ajax({
+/* jQuery使うとこうなるけど…。 */
+/* $(document).ready(function(event){
+    console.log("1111111")
+    $(document).on('submit', '.post-form', function(event){
+        console.log("22222222")
+        event.preventDefault();
+        console.log($(this).serialize());
+        $.ajax({
         type: 'POST',
         url: $(this).attr('action'),
-    })
-    .then(
-        function(response){
-        $('.main-comment-section').html(response['form']);
-    },
-        function(rs, e){
-        console.log(rs.responseText);
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response){
+            console.log("333333333")
+            $('.main-comment-section').html(response['form']);
+            const textbox = document.getElementById("id_text");
+            textbox.value = "";
+        },
+        error: function(rs, e){
+            console.log("44444444444444")
+            console.log(rs.responseText);
+        },
+        });
     });
+}); */
+
+
+/* jQueryを使わずに！ */
+const commentSend = document.getElementById("comment_send");
+console.log(commentSend);
+commentSend.addEventListener('click', async (e) => {
+    let form = new FormData();
+    form.append('text', '何入れる？');
+    console.log(form);
+    const result = await fetch(
+        `comment_send`,
+        {
+            method: 'POST',
+            headers: {'Content-Type': 'form-data'},
+            body: form,
+        })
+        .then(response => console.log(response));
 });

@@ -55,21 +55,24 @@ def comment_send(request, pk):
     if request.method == 'POST':
         print("1")
         form = CommentForm(request.POST)
+        comments = Comment.objects.filter(movie = movie).order_by('-created_date')
         if form.is_valid():
             print("2")
             comment = form.save(commit=False)
             comment.movie = movie
             comment.author = request.user
             comment.save()
+        else:
+            print(form.errors)
     else:
         print("3")
         form = CommentForm()
     print("4")
     if request.is_ajax():
         print("aaaaaaaaaa")
-        html = render_to_string('comment.html', {"form": form}, request=request )
+        html = render_to_string('comment.html', {"form": form, "comments": comments}, request=request )
         return JsonResponse({'form': html}) 
-    return HttpResponse("END")
+    return HttpResponse("NG")
 
 
 

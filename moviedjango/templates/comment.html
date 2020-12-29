@@ -5,8 +5,8 @@
             {{item}}
         </div>
     {% endfor %}
-    <button type="submit" class="btn-sm btn-outline-secondary col-1 comment-send" id="comment-send">COMMENT</button>
 </form>
+<button type="submit" class="btn-sm btn-outline-secondary col-1 comment_send" id="comment_send">COMMENT</button>
 {% for comment in comments %}
     <div class="comment" style="width:1080px">
         <strong>NAME : {{ comment.author }}</strong>
