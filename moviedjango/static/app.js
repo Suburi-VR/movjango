@@ -61,16 +61,18 @@ iconstop.forEach(icontop =>{
 /* jQueryを使わずに！ */
 const commentSend = document.getElementById("comment_send");
 console.log(commentSend);
-commentSend.addEventListener('click', async (e) => {
+commentSend.addEventListener('click', async (e)=> {
     let form = new FormData();
-    form.append('text', '何入れる？');
-    console.log(form);
+    const value = document.getElementById("id_text").value;
+    form.append('text', value);
+    console.log(form.get("text"));
     const result = await fetch(
         `comment_send`,
         {
             method: 'POST',
-            headers: {'Content-Type': 'form-data'},
             body: form,
         })
         .then(response => console.log(response));
+        const textbox = document.getElementById("id_text");
+        textbox.value = "";
 });
