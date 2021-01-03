@@ -71,7 +71,7 @@ commentSend.addEventListener('click', async (e)=> {
         `comment_send`,
         {
             method: 'POST',
-            body: data,
+            body: form,
         })
         .then(response => console.log(response));
         const textbox = document.getElementById("id_text");
