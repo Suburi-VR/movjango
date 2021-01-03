@@ -65,12 +65,13 @@ commentSend.addEventListener('click', async (e)=> {
     let form = new FormData();
     const value = document.getElementById("id_text").value;
     form.append('text', value);
-    console.log(form.get("text"));
+    const data = {'text': form.get("text")};
+    console.log(data);
     const result = await fetch(
         `comment_send`,
         {
             method: 'POST',
-            body: form,
+            body: data,
         })
         .then(response => console.log(response));
         const textbox = document.getElementById("id_text");
