@@ -71,6 +71,7 @@ commentSend.addEventListener('click', async (e)=> {
         `comment_send`,
         {
             method: 'POST',
+            headers: {'Content-Type': 'application/javascript'},
             body: form,
         })
         .then(response => console.log(response));
