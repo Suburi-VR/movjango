@@ -1,7 +1,7 @@
 const icons = Array.from(document.getElementsByClassName("favorite-icon"));
-icons.forEach(icon =>{
+icons.forEach(icon => {
     icon.addEventListener('click', async () => {
-        const result = await fetch(`favorite`,{ method: 'POST' });
+        const result = await fetch(`favorite`, { method: 'POST' });
         const favored = document.getElementById('fav-id');
         const disfavored = document.getElementById('fav-id2');
         const fav_id_class = favored.classList;
@@ -19,7 +19,7 @@ icons.forEach(icon =>{
 });
 
 const iconstop = Array.from(document.getElementsByClassName("favorite-icon-top"));
-iconstop.forEach(icontop =>{
+iconstop.forEach(icontop => {
     icontop.addEventListener('click', async (e) => {
         const result = await fetch(`/movie/${icontop.dataset.movieid}/favorite`, { method: 'POST' });
         const favored = document.getElementById(`fav${icontop.dataset.movieid}`);
@@ -61,20 +61,20 @@ iconstop.forEach(icontop =>{
 /* jQueryを使わずに！ */
 const commentSend = document.getElementById("comment_send");
 console.log(commentSend);
-commentSend.addEventListener('click', async (e)=> {
-    let form = new FormData();
+commentSend.addEventListener('click', async (e) => {
+    const form = new FormData();
     const value = document.getElementById("id_text").value;
-    form.append('text', value);
-    const data = {'text': form.get("text")};
+    form.append("text", value);
+    console.log(form);
+    const data = { "text": form.get("text") };
     console.log(data);
     const result = await fetch(
         `comment_send`,
         {
             method: 'POST',
-            headers: {'Content-Type': 'application/javascript'},
             body: form,
         })
-        .then(response => console.log(response));
-        const textbox = document.getElementById("id_text");
-        textbox.value = "";
+    console.log(result);
+    const textbox = document.getElementById("id_text");
+    textbox.value = "";
 });

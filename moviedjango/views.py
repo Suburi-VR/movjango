@@ -49,10 +49,10 @@ def movie_detail(request, pk):
     form = CommentForm(request.POST)
     return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
 
-@csrf_exempt
 def comment_send(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     if request.method == 'POST':
+        print(request.body)
         print("1")
         form = CommentForm(request.POST)
         comments = Comment.objects.filter(movie = movie).order_by('-created_date')
