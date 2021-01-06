@@ -18,6 +18,8 @@ import datetime
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from django.template.loader import render_to_string
+import sys
+import json
 
 
 
@@ -50,29 +52,14 @@ def movie_detail(request, pk):
     return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
 
 def comment_send(request, pk):
-    movie = get_object_or_404(Movie, pk=pk)
-    if request.method == 'POST':
-        print(request.body)
-        print("1")
-        form = CommentForm(request.POST)
-        comments = Comment.objects.filter(movie = movie).order_by('-created_date')
-        if form.is_valid():
-            print("2")
-            comment = form.save(commit=False)
-            comment.movie = movie
-            comment.author = request.user
-            comment.save()
-        else:
-            print(form.errors)
-    else:
-        print("3")
-        form = CommentForm()
-    print("4")
-    if request.is_ajax():
-        print("aaaaaaaaaa")
-        html = render_to_string('comment.html', {"form": form, "comments": comments}, request=request )
-        return JsonResponse({'form': html}) 
-    return HttpResponse("NG")
+    print(request.body)
+    movie = get_object_or_404(Movie,pk=pk)
+    comment = Comment()
+    comment.movie = movie
+    comment.author = request.user
+    comment.text = request.body
+    comment.save()
+    return HttpResponse("ww")
 
 
 

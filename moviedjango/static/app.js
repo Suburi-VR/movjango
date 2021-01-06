@@ -1,3 +1,23 @@
+/* 【csrftoken】 */
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+
+
 const icons = Array.from(document.getElementsByClassName("favorite-icon"));
 icons.forEach(icon => {
     icon.addEventListener('click', async () => {
@@ -62,18 +82,18 @@ iconstop.forEach(icontop => {
 const commentSend = document.getElementById("comment_send");
 console.log(commentSend);
 commentSend.addEventListener('click', async (e) => {
-    const form = new FormData();
     const value = document.getElementById("id_text").value;
-    form.append("text", value);
-    console.log(form);
-    const data = { "text": form.get("text") };
-    console.log(data);
+    console.log(value);
     const result = await fetch(
         `comment_send`,
         {
             method: 'POST',
-            body: form,
-        })
+            body: value,
+            headers: {
+                'X-CSRFToken': csrftoken,
+                'Accept': 'application/json'
+            }
+        });
     console.log(result);
     const textbox = document.getElementById("id_text");
     textbox.value = "";
