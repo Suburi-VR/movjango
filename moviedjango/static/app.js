@@ -88,7 +88,7 @@ commentSend.addEventListener('click', async (e) => {
         `comment_send`,
         {
             method: 'POST',
-            body: value,
+            body: JSON.stringify(value),
             headers: {
                 'X-CSRFToken': csrftoken,
                 'Accept': 'application/json'

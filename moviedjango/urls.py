@@ -19,5 +19,4 @@ urlpatterns = [
     path('movie/<int:pk>/disfav', views.disfav, name='disfav'),
     path('favorites/', views.favorites, name='favorites'),
     path('search/', views.search, name='search'),
-    # path('tag', views.tag, name='tag'),
 ]
