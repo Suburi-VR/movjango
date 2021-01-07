@@ -91,9 +91,13 @@ commentSend.addEventListener('click', async (e) => {
             body: JSON.stringify(value),
             headers: {
                 'X-CSRFToken': csrftoken,
-                'Accept': 'application/json'
+                'Content-type': 'application/json'
             }
         });
+    const myClass = document.getElementsByClassName("addcomment");
+    for (var i = 0; i < myClass.length; i++) {
+        myClass[i].innerHTML = value;
+    }
     console.log(result);
     const textbox = document.getElementById("id_text");
     textbox.value = "";

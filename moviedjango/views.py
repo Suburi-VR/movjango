@@ -53,15 +53,13 @@ def movie_detail(request, pk):
 
 def comment_send(request, pk):
     print(json.loads(request.body))
-    print(request)
     movie = get_object_or_404(Movie,pk=pk)
     comment = Comment()
     comment.movie = movie
     comment.author = request.user
     comment.text = json.loads(request.body)
     comment.save()
-    if request.is_ajax():
-        print("ajax!!!!!")
+    print(request.is_ajax())
     return HttpResponse("ww")
 
 
