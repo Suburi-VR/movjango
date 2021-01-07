@@ -80,10 +80,8 @@ iconstop.forEach(icontop => {
 
 /* jQueryを使わずに！ */
 const commentSend = document.getElementById("comment_send");
-console.log(commentSend);
 commentSend.addEventListener('click', async (e) => {
     const value = document.getElementById("id_text").value;
-    console.log(value);
     const result = await fetch(
         `comment_send`,
         {
@@ -94,10 +92,8 @@ commentSend.addEventListener('click', async (e) => {
                 'Content-type': 'application/json'
             }
         });
-    const myClass = document.getElementsByClassName("addcomment");
-    for (var i = 0; i < myClass.length; i++) {
-        myClass[i].innerHTML = value;
-    }
+    const myClass =  Array.from(document.getElementsByClassName("comment"));
+    console.log(myClass)
     console.log(result);
     const textbox = document.getElementById("id_text");
     textbox.value = "";

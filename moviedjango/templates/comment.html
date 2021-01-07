@@ -10,6 +10,6 @@
 {% for comment in comments %}
     <div class="comment" style="width:1080px">
         <strong>NAME : {{ comment.author }}</strong>
-        <p class="addcomment">{{ comment.text }}</p>
+        <p class="addcomment" id="{{ comment.id }}">{{ comment.text }}</p>
     </div>
 {% endfor %}
