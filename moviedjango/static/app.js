@@ -82,21 +82,21 @@ iconstop.forEach(icontop => {
 const commentSend = document.getElementById("comment_send");
 commentSend.addEventListener('click', async (e) => {
     const value = document.getElementById("id_text").value;
-    const result = await fetch(
-        `comment_send`,
-        {
-            method: 'POST',
-            body: JSON.stringify(value),
-            headers: {
-                'X-CSRFToken': csrftoken,
-                'Content-type': 'application/json'
-            }
-        });
-    const comments = document.getElementById("comments");
-    if (value !== ""){
+    if (!value.match(/^[ 　\r\n\t]*$/)){
+        const result = await fetch(
+            `comment_send`,
+            {
+                method: 'POST',
+                body: JSON.stringify(value),
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'Content-type': 'application/json'
+                }
+            });
+        const comments = document.getElementById("comments");
         comments.insertAdjacentHTML('afterbegin', `<strong>NAME : ${comments.dataset.user}</strong><p class="addcomment">${value}</p>`);
         console.log(result);
-        const textbox = document.getElementById("id_text");
-        textbox.value = "";
     }
+    const textbox = document.getElementById("id_text");
+    textbox.value = "";
 });

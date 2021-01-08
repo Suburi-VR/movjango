@@ -20,7 +20,6 @@ from django.http.response import JsonResponse
 from django.template.loader import render_to_string
 import sys
 import json
-from django.core import validators
 
 
 
@@ -52,18 +51,14 @@ def movie_detail(request, pk):
     form = CommentForm(request.POST)
     return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
 
+@login_required(login_url='/accounts/login/')
 def comment_send(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
-    form = CommentForm(request.POST)
     comment = Comment()
     comment.movie = movie
     comment.author = request.user
     comment.text = json.loads(request.body)
-    empty_values = list(validators.EMPTY_VALUES)
-    if not comment.text in empty_values:
-        comment.save()
-    if request.is_ajax:
-        print("ajax!!!")
+    comment.save()
     return HttpResponse("ww")
 
 
