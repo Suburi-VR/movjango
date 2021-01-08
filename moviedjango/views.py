@@ -20,6 +20,7 @@ from django.http.response import JsonResponse
 from django.template.loader import render_to_string
 import sys
 import json
+from django.core import validators
 
 
 
@@ -58,7 +59,8 @@ def comment_send(request, pk):
     comment.movie = movie
     comment.author = request.user
     comment.text = json.loads(request.body)
-    if not comment.text == "":
+    empty_values = list(validators.EMPTY_VALUES)
+    if not comment.text in empty_values:
         comment.save()
     if request.is_ajax:
         print("ajax!!!")
