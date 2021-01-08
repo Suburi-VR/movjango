@@ -79,11 +79,11 @@ a.dropdown-item {
     width: 240px;
 }
 
-.comment p {
+.comments p {
     border-bottom: 1px solid #0f4c75;
 }
 
-.comment {
+.comments {
     margin-top: 2rem;
 }
 
@@ -91,7 +91,7 @@ a.page-link {
     color: #3282b3
 }
 
-.comment p {
+.comments p {
     word-break: break-all;
 }
 

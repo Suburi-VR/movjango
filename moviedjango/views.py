@@ -52,14 +52,16 @@ def movie_detail(request, pk):
     return render(request, 'movie_detail.html', {'movie': movie, 'comments': comments, 'favored': faveored_or_not, 'form': form})
 
 def comment_send(request, pk):
-    print(json.loads(request.body))
     movie = get_object_or_404(Movie,pk=pk)
+    form = CommentForm(request.POST)
     comment = Comment()
     comment.movie = movie
     comment.author = request.user
     comment.text = json.loads(request.body)
-    comment.save()
-    print(request.is_ajax())
+    if not comment.text == "":
+        comment.save()
+    if request.is_ajax:
+        print("ajax!!!")
     return HttpResponse("ww")
 
 

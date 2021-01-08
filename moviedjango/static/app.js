@@ -64,7 +64,7 @@ iconstop.forEach(icontop => {
         data: $(this).serialize(),
         dataType: 'json',
         success: function(response){
-            console.log("333333333")
+            console.log("333333333");
             $('.main-comment-section').html(response['form']);
             const textbox = document.getElementById("id_text");
             textbox.value = "";
@@ -92,9 +92,11 @@ commentSend.addEventListener('click', async (e) => {
                 'Content-type': 'application/json'
             }
         });
-    const myClass =  Array.from(document.getElementsByClassName("comment"));
-    console.log(myClass)
-    console.log(result);
-    const textbox = document.getElementById("id_text");
-    textbox.value = "";
+    const comments = document.getElementById("comments");
+    if (value !== ""){
+        comments.insertAdjacentHTML('afterbegin', `<strong>NAME : ${comments.dataset.user}</strong><p class="addcomment">${value}</p>`);
+        console.log(result);
+        const textbox = document.getElementById("id_text");
+        textbox.value = "";
+    }
 });

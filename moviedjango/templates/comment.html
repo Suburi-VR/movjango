@@ -7,9 +7,9 @@
     {% endfor %}
 </form>
 <button type="submit" class="btn-sm btn-outline-secondary col-1 comment_send" id="comment_send">COMMENT</button>
-{% for comment in comments %}
-    <div class="comment" style="width:1080px">
-        <strong>NAME : {{ comment.author }}</strong>
-        <p class="addcomment" id="{{ comment.id }}">{{ comment.text }}</p>
-    </div>
-{% endfor %}
+<div class="comments" style="width:1080px" id="comments" data-user="{{ request.user }}">
+    {% for comment in comments %}
+            <strong>NAME : {{ comment.author }}</strong>
+            <p class="addcomment" id="{{ comment.id }}">{{ comment.text }}</p>
+    {% endfor %}
+</div>
