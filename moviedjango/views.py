@@ -61,7 +61,9 @@ def comment_send(request, pk):
     comment.save()
     return HttpResponse("ww")
 
-
+def comment_delete(request, id):
+    comment = get_object_or_404(Comment,id=id)
+    
 
 @login_required(login_url='/accounts/login/')
 def movie_form(request):
