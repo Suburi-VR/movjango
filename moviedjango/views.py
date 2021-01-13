@@ -43,6 +43,7 @@ def toppage(request):
             'is_paginated': page.has_other_pages,}
     return render(request, 'toppage.html', ctx)
 
+@login_required(login_url='/accounts/login/')
 @csrf_exempt
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie,pk=pk)
@@ -59,10 +60,13 @@ def comment_send(request, pk):
     comment.author = request.user
     comment.text = json.loads(request.body)
     comment.save()
-    return HttpResponse("ww")
+    return HttpResponse("OK")
 
+@login_required(login_url='/accounts/login/')
 def comment_delete(request, id):
     comment = get_object_or_404(Comment,id=id)
+    comment.delete()
+    return HttpResponse("OK")
     
 
 @login_required(login_url='/accounts/login/')
@@ -100,6 +104,7 @@ def movie_edit(request, pk):
         form = EditForm(instance=movie)
     return render(request, 'movie_edit.html', {'form': form, 'movie': movie})
 
+@login_required(login_url='/accounts/login/')
 def logout_view(request):
     logout(request)
     return redirect('toppage')
@@ -118,7 +123,7 @@ def signup_view(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-
+@login_required(login_url='/accounts/login/')
 def favorites(request):
     if request.method == 'GET':
         page_num = request.GET.get('p', 1)
@@ -137,6 +142,7 @@ def favorites(request):
             'is_paginated': page.has_other_pages,}
     return render(request, 'favorites.html', dic)
 
+@login_required(login_url='/accounts/login/')
 @csrf_exempt
 def favorite(request, pk):
     if request.method != 'POST':
@@ -148,12 +154,14 @@ def favorite(request, pk):
         movie.favor(request.user)
     return HttpResponse("OK")
 
+@login_required(login_url='/accounts/login/')
 def disfav(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     if movie.favored_by(request.user):
         movie.disfavor(request.user)
     return redirect(request.META.get('HTTP_REFERER'))
 
+@login_required(login_url='/accounts/login/')
 def search(request):
     if request.method == 'GET':
         keyword = request.GET.get('keyword')
@@ -176,7 +184,6 @@ def search(request):
         'is_paginated': page.has_other_pages,
     }
     return render(request, 'search.html', dic)
-
 
 def for_s3(request):
     d = datetime.datetime.now()
