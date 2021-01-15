@@ -99,7 +99,26 @@ commentSend.addEventListener('click', async (e) => {
         console.log(commentsList[0])
         if (commentsList[0] == undefined){
             comments.insertAdjacentHTML('afterbegin',
-            `<div class="comment" id="new" data-id="new">
+            `<div class="modal fade" id="commentdeleteModal" tabindex="-1" role="dialog" aria-labelledby="commentdeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="commentdeleteModalLabel">このコメントを削除します</h5>
+                            <button type="button" class="close" datadismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" data-dismiss="modal">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            よろしいですか？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
+                            <a href="{% url 'comment_delete' id=comment.id %}"><button type="button" class="btn btn-danger rounded-0">削除</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment" id="new" data-id="new">
                 <strong>NAME : ${comments.dataset.user}</strong>
                     <div class="row justify-content-between">
                         <p class="addcomment" style="width:1160px">${value}
@@ -115,12 +134,31 @@ commentSend.addEventListener('click', async (e) => {
         else{
             var commentId = Number(commentsList[0].id) + 1;
             comments.insertAdjacentHTML('afterbegin',
-            `<div class="comment" id=${commentId} data-id=${commentId}>
+            `<div class="modal fade" id="commentdeleteModal${commentId}" tabindex="-1" role="dialog" aria-labelledby="commentdeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="commentdeleteModalLabel">このコメントを削除します</h5>
+                            <button type="button" class="close" datadismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" data-dismiss="modal">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            よろしいですか？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
+                            <a href=/${commentId}/comment_delete><button type="button" class="btn btn-danger rounded-0">削除</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment" id=${commentId} data-id=${commentId}>
                 <strong>NAME : ${comments.dataset.user}</strong>
                     <div class="row justify-content-between">
                         <p class="addcomment" style="width:1160px">${value}
                             <div class="comment_delete col-1">
-                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#commentdeleteModal">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#commentdeleteModal${commentId}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
                                         <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
                                     </svg>
