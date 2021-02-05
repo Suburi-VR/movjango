@@ -83,12 +83,13 @@ iconstop.forEach(icontop => {
 const commentSend = document.getElementById("comment_send");
 commentSend.addEventListener('click', async (e) => {
     const value = document.getElementById("id_text").value;
+    const author =  comments.dataset.user;
     if (!value.match(/^[ 　\r\n\t]*$/)){
         const result = await fetch(
             `comment_send`,
             {
                 method: 'POST',
-                body: JSON.stringify(value),
+                body: JSON.stringify(value, author),
                 headers: {
                     'X-CSRFToken': csrftoken,
                     'Content-type': 'application/json'
