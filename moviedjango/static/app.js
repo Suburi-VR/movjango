@@ -89,7 +89,7 @@ commentSend.addEventListener('click', async (e) => {
             `comment_send`,
             {
                 method: 'POST',
-                body: JSON.stringify(value, author),
+                body: JSON.stringify(value),
                 headers: {
                     'X-CSRFToken': csrftoken,
                     'Content-type': 'application/json'
@@ -114,13 +114,13 @@ commentSend.addEventListener('click', async (e) => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
-                            <a href="{% url 'comment_delete' id=comment.id %}"><button type="button" class="btn btn-danger rounded-0">削除</button></a>
+                            <a href="{% url 'comment_delete' id=comment.id %}"><button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="comment" id="new" data-id="new">
-                <strong>NAME : ${comments.dataset.user}</strong>
+                <strong>NAME : ${author}</strong>
                     <div class="row justify-content-between">
                         <p class="addcomment" style="width:1160px">${value}
                             <div class="comment_delete col-1">
@@ -149,13 +149,13 @@ commentSend.addEventListener('click', async (e) => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
-                            <a href=/${commentId}/comment_delete><button type="button" class="btn btn-danger rounded-0">削除</button></a>
+                            <a href=/${commentId}/comment_delete><button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="comment" id=${commentId} data-id=${commentId}>
-                <strong>NAME : ${comments.dataset.user}</strong>
+                <strong>NAME : ${author}</strong>
                     <div class="row justify-content-between">
                         <p class="addcomment" style="width:1160px">${value}
                             <div class="comment_delete col-1">
@@ -171,4 +171,11 @@ commentSend.addEventListener('click', async (e) => {
     }
     const textbox = document.getElementById("id_text");
     textbox.value = "";
+});
+
+
+const commentDelete = document.getElementById("comment_delete");
+commentDelete.addEventListener('click', async (e) => {
+    const result = await fetch(`comment_delete`,{method: 'POST'});
+    console.log("aaaa")
 });
