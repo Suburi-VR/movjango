@@ -97,7 +97,6 @@ commentSend.addEventListener('click', async (e) => {
             });
         const comments = document.getElementById("comments");
         const commentsList = Array.from(document.getElementsByClassName("comment"));
-        console.log(commentsList[0])
         if (commentsList[0] == undefined){
             comments.insertAdjacentHTML('afterbegin',
             `<div class="modal fade" id="commentdeleteModal" tabindex="-1" role="dialog" aria-labelledby="commentdeleteModalLabel" aria-hidden="true">
@@ -114,7 +113,7 @@ commentSend.addEventListener('click', async (e) => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
-                            <a href="{% url 'comment_delete' id=comment.id %}"><button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button></a>
+                            <button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button>
                         </div>
                     </div>
                 </div>
@@ -149,7 +148,7 @@ commentSend.addEventListener('click', async (e) => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
-                            <a href=/${commentId}/comment_delete><button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button></a>
+                            <button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button>
                         </div>
                     </div>
                 </div>
@@ -167,7 +166,6 @@ commentSend.addEventListener('click', async (e) => {
                             </div>
                         </p>`);
         }
-        console.log(result);
     }
     const textbox = document.getElementById("id_text");
     textbox.value = "";
@@ -176,6 +174,11 @@ commentSend.addEventListener('click', async (e) => {
 
 const commentDelete = document.getElementById("comment_delete");
 commentDelete.addEventListener('click', async (e) => {
-    const result = await fetch(`comment_delete`,{method: 'POST'});
-    console.log("aaaa")
+    const result = await fetch(`comment_delete`,{method: 'GET'});
+
+    const comments = document.getElementById("comments");
+    console.log(comments);
+    comments.remove();
+
+
 });

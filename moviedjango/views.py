@@ -66,6 +66,7 @@ def comment_send(request, pk):
 def comment_delete(request, id):
     comment = get_object_or_404(Comment,id=id)
     comment.delete()
+    print("SSSSSSaa")
     return HttpResponse("OK")
     
 
