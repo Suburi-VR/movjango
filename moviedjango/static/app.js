@@ -113,7 +113,7 @@ commentSend.addEventListener('click', async (e) => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
-                            <button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button>
+                            <button type="button" class="btn btn-danger rounded-0" id="delete_button">削除</button>
                         </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@ commentSend.addEventListener('click', async (e) => {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
-                            <button type="button" class="btn btn-danger rounded-0" id="comment_delete">削除</button>
+                            <button type="button" class="btn btn-danger rounded-0" id="delete_button">削除</button>
                         </div>
                     </div>
                 </div>
@@ -171,14 +171,11 @@ commentSend.addEventListener('click', async (e) => {
     textbox.value = "";
 });
 
-
-const commentDelete = document.getElementById("comment_delete");
-commentDelete.addEventListener('click', async (e) => {
-    const result = await fetch(`comment_delete`,{method: 'GET'});
-
-    const comments = document.getElementById("comments");
-    console.log(comments);
-    comments.remove();
-
-
+const commentsDeleteList = Array.from(document.getElementsByClassName("comment"));
+commentsDeleteList.forEach(commentdelete => {
+    deleteButton = document.getElementById("delete_button");
+    deleteButton.addEventListener("click", async (e) => {
+        const result = await fetch(`/movie/${commentdelete.dataset.commentId}/comment_delete`);
+        console.log(commentdelete.id)
+    });
 });
