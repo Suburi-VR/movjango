@@ -23,12 +23,12 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary rounded-0" data-dismiss="modal">キャンセル</button>
-                        <button type="button" class="btn btn-danger rounded-0" id="delete_button">削除</button>
+                        <button type="button" class="btn btn-danger rounded-0" id="{{ comment.id }}" data-dismiss="modal">削除</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="comment" id="{{ comment.id }}" data-id="{{ comment.id }}">
+        <div class="comment" id="com{{ comment.id }}" data-id="{{ comment.id }}">
             <strong>NAME : {{ comment.author }}</strong>
             <div class="row justify-content-between">
                 <p class="addcomment" style="width:1160px">{{ comment.text }}

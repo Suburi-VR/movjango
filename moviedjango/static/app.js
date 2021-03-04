@@ -171,11 +171,12 @@ commentSend.addEventListener('click', async (e) => {
     textbox.value = "";
 });
 
-const commentsDeleteList = Array.from(document.getElementsByClassName("comment"));
-commentsDeleteList.forEach(commentdelete => {
-    deleteButton = document.getElementById("delete_button");
-    deleteButton.addEventListener("click", async (e) => {
-        const result = await fetch(`/movie/${commentdelete.dataset.commentId}/comment_delete`);
-        console.log(commentdelete.id)
+const DeleteButtonsList = Array.from(document.getElementsByClassName("btn-danger"));
+DeleteButtonsList.forEach(DeleteButtons => {
+    DeleteButtons.addEventListener('click', async (e) => {
+        const result = await fetch(`/movie/${DeleteButtons.id}/comment_delete`, { method: 'GET'});
+        const commentsDeleteList = Array.from(document.getElementsByClassName('comment'));
+        const commentDelete = document.getElementById(`com${DeleteButtons.id}`);
+        commentDelete.remove();
     });
 });
